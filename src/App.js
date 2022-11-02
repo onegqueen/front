@@ -6,6 +6,7 @@ import GlobalStyle from "./GlobalStyles";
 import Stats from "./pages/Stats/Stats";
 import Summary from "./pages/Summary/Summary";
 
+
 function App() {
   return (
     <>
