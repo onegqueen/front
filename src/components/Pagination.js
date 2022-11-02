@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 const Page = styled.ul`
     text-align:center;
 `
@@ -34,7 +34,7 @@ const Pagination = ({postPerPage,totalPosts,paginate})=>{
             <Page className="pagination">
                 {pageNumbers.map(num=>
                     <Pagenum key = {num}>
-                        <Click onClick={()=> paginate(num)}href='!#'>
+                        <Click onClick={()=> paginate(num)}href='../:{num}'>
                             {num}
                         </Click>
                     </Pagenum>)}

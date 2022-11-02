@@ -72,9 +72,14 @@
         {
             "id":2,
             "data":[
-                {"key" : "spring"},
-                {"key" : "web"},
-                {"key" : "algorithm"}
+                {"key" : "front-end"},
+                {"key" : "back-end"},
+                {"key" : "algorithm"},
+                {"key" : "OS"},
+                {"key" : "Android"},
+                {"key" : "IOS"},
+                {"key" : "DB"},
+                {"key" : "C.S"}
             ]
         }
 

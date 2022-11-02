@@ -1,8 +1,8 @@
-import Keywordbar from "../components/Keywordbar";
-import KeywordList from "../components/KeywordList"
+import Keywordbar from "../../components/Board/Keywordbar";
+import KeywordList from "../../components/Board/KeywordList"
 import{BrowserRouter,Route,Routes} from "react-router-dom";
 
-export default function Keywordcontent(){
+export default function KeywordContent(){
     return(
         <div>
             <Keywordbar/>

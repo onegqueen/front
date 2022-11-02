@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import apiClient from "../libs/api/apiClient";
+import apiClient from "../../libs/api/apiClient";
 import { useState, useEffect } from "react";
-import UserAPI from '../libs/api/user';
-import Pagination from "./Pagination";
+import UserAPI from '../../libs/api/user';
+import Pagination from "../Pagination";
 import {Link} from 'react-router-dom';
 
 const Keywords = styled.ul`
@@ -72,7 +72,7 @@ export default function KeywordList(){
                 {currentPosts.map((Key)=>(
                     <Content key={Key.key}>
                             <Word>
-                                <Link to ="/keywordc/:id">{Key.key}</Link>
+                                <Link to ="/keyword/:id">{Key.key}</Link>
                             </Word>
                     </Content>
                 ))}
