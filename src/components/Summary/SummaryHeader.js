@@ -34,6 +34,18 @@ const SummaryHeader = (props) => {
         <KeywordBtn name="알고리즘" onClick={selectKeyword}>
           알고리즘
         </KeywordBtn>
+        <KeywordBtn name="운영체제" onClick={selectKeyword}>
+          운영체제
+        </KeywordBtn>
+        <KeywordBtn name="Android" onClick={selectKeyword}>
+          Android
+        </KeywordBtn>
+        <KeywordBtn name="IOS" onClick={selectKeyword}>
+          IOS
+        </KeywordBtn>
+        <KeywordBtn name="Database" onClick={selectKeyword}>
+          Database
+        </KeywordBtn>
         <KeywordBtn name="C.S" onClick={selectKeyword}>
           C.S
         </KeywordBtn>
