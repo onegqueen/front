@@ -1,20 +1,24 @@
 import { createPortal } from 'react-dom';
 import React,{useState} from 'react';
 import Header from "./components/Header"
-import UserList from "./components/UserList"
+import TodayRank from"./page/TodayRanking"
+import KeywordContent from"./page/KeywordContent"
 import Pagination from "./components/Pagination"
-import{BrowserRouter,Route,Switch} from "react-router-dom";
+import{BrowserRouter,Route,Routes} from "react-router-dom";
 
 
 function App() {
   return (
-    <>
-      <div className="App">
+      <BrowserRouter>
         <Header/>
-        <UserList/>
-       </div>
-    </>
+        <Routes>
+          <Route path="/rank/:id" element ={<TodayRank/>}/>
+          <Route path="/keywordc/:id" element ={<KeywordContent/>}/>
+        </Routes>
+      </BrowserRouter>
   );
 }
 export default App;
-/*?*/
+/*<Routes>
+          <TodayRank/>
+        </Routes>*/
