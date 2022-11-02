@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
+import ReactMarkdown from 'react-markdown'
 
 import SummaryHeader from "../../components/Summary/SummaryHeader";
 import SummaryContents from "../../components/Summary/SummaryContents";
@@ -25,6 +26,7 @@ const Summary = () => {
       <Content>
         <SummaryHeader keyword={keyword} setKeyword={setKeyword} />
         <SummaryContents keyword={keyword} />
+
       </Content>
     </Main>
   );
