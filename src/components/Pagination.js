@@ -34,8 +34,8 @@ const Pagination = ({postPerPage,totalPosts,paginate})=>{
             <Page className="pagination">
                 {pageNumbers.map(num=>
                     <Pagenum key = {num}>
-                        <Click onClick={()=> paginate(num)}href='../:{num}'>
-                            {num}
+                        <Click onClick={()=> paginate(num)}>
+                            <Link to='./'>{num}</Link>
                         </Click>
                     </Pagenum>)}
 
