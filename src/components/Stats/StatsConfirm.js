@@ -103,7 +103,7 @@ const StatsConfirm = (props) => {
           </StatBtn>
         </StatBtnList>
       </Stat>
-      <ConfirmBtn onClick={() => navigate("/summary")}>포인트 확정 및 요약하러가기</ConfirmBtn>
+      <ConfirmBtn onClick={() => navigate("/summary")}>포인트 확정</ConfirmBtn>
     </Main>
   );
 };
