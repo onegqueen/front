@@ -4,7 +4,9 @@ const Main = styled.div``;
 
 const Header = styled.div`
   text-align: center;
-  margin: 10px 0;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-family: SCDream9;
 `;
 
 const StatsHeader = (prop) => {
@@ -12,7 +14,7 @@ const StatsHeader = (prop) => {
 
   return (
     <Main>
-      <Header>***님의 획득 포인트 : {points}</Header>
+      <Header>이경훈님의 획득 포인트 : {points}</Header>
     </Main>
   );
 };
