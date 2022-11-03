@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import axios from "axios";
 
 const Main = styled.div`
   width: 350px;
@@ -48,7 +49,23 @@ const SummaryContents = (props) => {
     }
   };
 
-  console.log(summary);
+  const registerSummary = async () => {
+    try {
+      const res = await axios({
+        method: "post",
+        url: `/apiboard/summary/${summary.keyword}`,
+        data: {
+          topic: summary.title,
+          content: summary.content,
+        },
+      });
+
+      console.log(res);
+    } catch (error) {
+      const err = error.response.data;
+      console.log(err);
+    }
+  };
 
   return (
     <Main>
@@ -65,7 +82,7 @@ const SummaryContents = (props) => {
       ></Content>
       <div>미리보기</div>
       <ReactMarkdown children={summary.content} />
-      <RegisterBtn>등록하기</RegisterBtn>
+      <RegisterBtn onClick={registerSummary}>등록하기</RegisterBtn>
     </Main>
   );
 };
