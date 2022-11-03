@@ -5,6 +5,8 @@ import { Route, Routes } from "react-router-dom";
 import GlobalStyle from "./GlobalStyles";
 import Stats from "./pages/Stats/Stats";
 import Summary from "./pages/Summary/Summary";
+import LoginPage from "./pages/LoginPage";
+import MyAccountPage from "./pages/MyAccountPage";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route path="/summary" element={<Summary />}></Route>
         <Route path="/header" element={<Header />}></Route>
         <Route path="/userlist" element={<UserList />}></Route>
+        <Route path="/Login" element={<LoginPage />} />
+        <Route path="/MyAccount" element={<MyAccountPage />} />
       </Routes>
     </>
   );
