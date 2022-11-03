@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
-const Main = styled.div``;
+const Main = styled.div`
+  font-size: 1.4rem;
+`;
 
 const RemainPoints = styled.div`
-  margin: 10px 0;
+  margin: 1rem 0;
   text-align: center;
 `;
 
