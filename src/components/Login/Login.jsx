@@ -12,20 +12,12 @@ const Login = () => {
         <S.Input type="text" placeholder="아이디" />
         <S.Input type="password" placeholder="비밀번호" />
         <div>
-          <S.LoginButton>
-            <button>Login</button>
-          </S.LoginButton>
+          <S.LoginButton>Login</S.LoginButton>
         </div>
         <div>
-          <S.snsLogin>
-            <button>Google</button>
-          </S.snsLogin>
-          <S.snsLogin>
-            <button>Naver</button>
-          </S.snsLogin>
-          <S.snsLogin>
-            <button>KaKao</button>
-          </S.snsLogin>
+          <S.snsLogin>Google</S.snsLogin>
+          <S.snsLogin>Naver</S.snsLogin>
+          <S.snsLogin>KaKao</S.snsLogin>
         </div>
       </S.Form>
       <S.RegisterButton>

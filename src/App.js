@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import GlobalStyle from "./GlobalStyles";
 import Stats from "./pages/Stats/Stats";
 import Summary from "./pages/Summary/Summary";
+
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -24,6 +25,8 @@ function App() {
         <Route path="/MyAccount" element={<MyAccountPage />} />
         <Route path="/stats" element={<Stats />}></Route>
         <Route path="/summary" element={<Summary />}></Route>
+        <Route path="/header" element={<Header />}></Route>
+        <Route path="/userlist" element={<UserList />}></Route>
         <Route path="/rank" element={<TodayRank />}></Route>
         <Route path="/keyword" element={<KeywordContent />}></Route>
         <Route path="/test" element={<UserList />}></Route>
