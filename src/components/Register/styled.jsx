@@ -29,9 +29,23 @@ const Input = styled.input`
   }
 `;
 
+const SubmitButton = styled.button`
+  width: 100%;
+  height: 48px;
+  border: none;
+  font-weight: 700;
+  background-color: #d266f0;
+  border-radius: 64px;
+  color: white;
+  margin-bottom: 16px;
+  text-align: center;
+  cursor: pointer;
+`;
+
 const S = {
   Input,
   Container,
+  SubmitButton,
 };
 
 export default S;
