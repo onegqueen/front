@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import TodayRank from "./pages/Ranking/TodayRanking";
-import KeywordContent from "./pages/Board/KeywordContent";
+import AllContent from "./pages/Board/AllContent";
 import { Route, Routes } from "react-router-dom";
 import GlobalStyle from "./GlobalStyles";
 import Stats from "./pages/Stats/Stats";
@@ -10,7 +10,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import MyAccountPage from "./pages/MyAccountPage";
-import UserList from "./components/UserList";
+import UserList from "./components/Ranking/UserList";
 import Pagination from "./components/Pagination";
 import Friends from "./pages/Friends/Friends";
 import FriendsResponse from "./pages/Friends/FriendsResponse";
@@ -30,7 +30,7 @@ function App() {
         <Route path="/header" element={<Header />}></Route>
         <Route path="/userlist" element={<UserList />}></Route>
         <Route path="/rank" element={<TodayRank />}></Route>
-        <Route path="/keyword" element={<KeywordContent />}></Route>
+        <Route path="/board" element={<AllContent />}></Route>
         <Route path="/test" element={<UserList />}></Route>
         <Route path="/friends-list" element={<Friends />}></Route>
         <Route

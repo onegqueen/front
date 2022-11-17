@@ -13,9 +13,12 @@ export default function Header(){
     return(
         <Header_bar className = "header">
             <h1>
-                <Link to ="/keyword"> 게시판 </Link>
+                <Link to ="/board"> 게시판 </Link>
                 <Link to ="/rank"> 랭킹 </Link>
-                <a href="/"> 로그인 </a>
+                <Link to ="/Login"> 로그인 </Link>
+                <Link to ="/summary"> summary </Link>
+                <Link to ="/stats"> 꽃키우기 </Link>
+
             </h1>
         </Header_bar>
     )
