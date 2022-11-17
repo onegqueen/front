@@ -3,33 +3,58 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Main = styled.div`
-  width: 200px;
+  width: 20rem;
   margin: 0 auto;
+
+  font-size: 1.4rem;
 `;
 
 const Stat = styled.div`
   display: flex;
+  align-items: center;
+  height: 4rem;
 `;
 
 const StatName = styled.div`
-  width: 60px;
-  margin-left: 10px;
+  width: 6rem;
+  margin-left: 1rem;
 `;
 
 const StatPoints = styled.div`
-  width: 70px;
+  width: 7rem;
 `;
 
 const StatBtnList = styled.div`
   display: flex;
-  width: 60px;
+  width: 6rem;
   justify-content: space-between;
 `;
-const StatBtn = styled.button``;
+const StatPlusBtn = styled.button`
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: none;
+
+  background-color: #81c6e8;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5rem;
+`;
+const StatMinusBtn = styled(StatPlusBtn)`
+  background-color: #5da7db;
+`;
 
 const ConfirmBtn = styled.button`
-  width: 200px;
-  margin-top: 20px;
+  width: 20rem;
+  height: 2.5rem;
+  padding: 0;
+  border: none;
+  margin-top: 2rem;
+
+  background-color: #5f9df7;
+  color: white;
+  cursor: pointer;
+  border-radius: 1rem;
 `;
 
 const StatsConfirm = (props) => {
@@ -71,39 +96,39 @@ const StatsConfirm = (props) => {
         <StatName>물</StatName>
         <StatPoints>{stats.water}</StatPoints>
         <StatBtnList>
-          <StatBtn name="water" onClick={addPoints}>
+          <StatPlusBtn name="water" onClick={addPoints}>
             +
-          </StatBtn>
-          <StatBtn name="water" onClick={subPoints}>
+          </StatPlusBtn>
+          <StatMinusBtn name="water" onClick={subPoints}>
             -
-          </StatBtn>
+          </StatMinusBtn>
         </StatBtnList>
       </Stat>
       <Stat>
         <StatName>광합성</StatName>
         <StatPoints>{stats.photosynthesis}</StatPoints>
         <StatBtnList>
-          <StatBtn name="photosynthesis" onClick={addPoints}>
+          <StatPlusBtn name="photosynthesis" onClick={addPoints}>
             +
-          </StatBtn>
-          <StatBtn name="photosynthesis" onClick={subPoints}>
+          </StatPlusBtn>
+          <StatMinusBtn name="photosynthesis" onClick={subPoints}>
             -
-          </StatBtn>
+          </StatMinusBtn>
         </StatBtnList>
       </Stat>
       <Stat>
         <StatName>비료</StatName>
         <StatPoints>{stats.fertilizer}</StatPoints>
         <StatBtnList>
-          <StatBtn name="fertilizer" onClick={addPoints}>
+          <StatPlusBtn name="fertilizer" onClick={addPoints}>
             +
-          </StatBtn>
-          <StatBtn name="fertilizer" onClick={subPoints}>
+          </StatPlusBtn>
+          <StatMinusBtn name="fertilizer" onClick={subPoints}>
             -
-          </StatBtn>
+          </StatMinusBtn>
         </StatBtnList>
       </Stat>
-      <ConfirmBtn onClick={() => navigate("/summary")}>포인트 확정</ConfirmBtn>
+      <ConfirmBtn>포인트 확정</ConfirmBtn>
     </Main>
   );
 };
