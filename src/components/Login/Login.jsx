@@ -1,5 +1,5 @@
 import S from "./styled";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -8,18 +8,26 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   //아이디
-  const onIdHandler = (event) => {
-    setId(event.currentTarget.value);
+  const onIdHandler = (e) => {
+    setId(e.currentTarget.value);
   };
 
   //비밀번호
-  const onPasswordHandler = (event) => {
-    setPassword(event.currentTarget.value);
+  const onPasswordHandler = (e) => {
+    setPassword(e.currentTarget.value);
   };
 
   //로그인
-  const onSubmit = (event) => {
-    event.preventDefault();
+  const navigate = useNavigate();
+  const navigateToAccount = () => {
+    navigate("/MyAccount");
+    return alert("Login Success !!");
+  };
+
+  // 회원가입 페이지 이동
+  const navigate1 = useNavigate();
+  const navigateToRegister = () => {
+    navigate1("/Register");
   };
 
   return (
@@ -39,18 +47,17 @@ const Login = () => {
           placeholder="비밀번호"
         />
         <div>
-          <S.LoginButton type="submit" onSubmit={onSubmit}>
+          <S.LoginButton type="submit" onClick={navigateToAccount}>
             Login
           </S.LoginButton>
         </div>
         <div>
           <S.snsLogin>Google</S.snsLogin>
-          <S.snsLogin>Naver</S.snsLogin>
           <S.snsLogin>KaKao</S.snsLogin>
         </div>
       </S.Form>
-      <S.RegisterButton>
-        <Link to={"/register"}>"Link for Register"</Link>
+      <S.RegisterButton onClick={navigateToRegister}>
+        "Link for Register"
       </S.RegisterButton>
     </S.Container>
   );

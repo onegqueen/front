@@ -1,9 +1,13 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Container = styled.div`
-  width: 512px;
-  height: 600px;
-  position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 500px;
+  left: 50%;
+  transform: translate(-50%, 0);
   background: #f7f7f7;
   border-radius: 16px;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04);
@@ -12,6 +16,8 @@ const Container = styled.div`
   margin-bottom: 32px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Input = styled.input`
@@ -42,10 +48,24 @@ const SubmitButton = styled.button`
   cursor: pointer;
 `;
 
+const Title = styled.div`
+  margin-top: 67px;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #262626;
+`;
+
+const PasswordCheck = styled.button``;
+
 const S = {
   Input,
   Container,
   SubmitButton,
+  Title,
+  PasswordCheck,
 };
 
 export default S;

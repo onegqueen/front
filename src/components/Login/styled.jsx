@@ -54,7 +54,7 @@ const LoginButton = styled.div`
   height: 48px;
   border: none;
   font-weight: 700;
-
+  cursor: pointer;
   color: black;
 `;
 
