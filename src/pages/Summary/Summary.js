@@ -8,7 +8,7 @@ import SummaryContents from "../../components/Summary/SummaryContents";
 
 const Main = styled.div`
   display: flex;
-  height: 100vh;
+  height: calc(100% - 30px);
   justify-content: center;
   align-items: center;
 

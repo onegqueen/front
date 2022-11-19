@@ -68,6 +68,21 @@ const Row = styled.div`
   align-items: center;
 `;
 
+const AcceptBtn = styled.button`
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: none;
+
+  background-color: #81c6e8;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5rem;
+`;
+const DeclineBtn = styled(AcceptBtn)`
+  background-color: #5da7db;
+`;
+
 const FriendsResponseList = () => {
   const [friends, setFriends] = useState(test);
   return (
@@ -80,8 +95,8 @@ const FriendsResponseList = () => {
           </div>
           <div>
             {" "}
-            <button>o</button>
-            <button>x</button>
+            <AcceptBtn>o</AcceptBtn>
+            <DeclineBtn>x</DeclineBtn>
           </div>
         </Row>
       ))}

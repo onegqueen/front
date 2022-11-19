@@ -3,7 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1"
+    />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
@@ -26,7 +29,16 @@
     -->
     <title>Coding King</title>
   </head>
-  <body>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    "
+  >
     <noscript>Tomorrow Coding King</noscript>
     <div id="root"></div>
     <!--
