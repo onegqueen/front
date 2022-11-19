@@ -2,19 +2,35 @@ import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-const Main = styled.div``;
+const Main = styled.div`
+  height: 100px;
+  width: 350px;
+`;
 
 const Header = styled.div`
   text-align: center;
+  font-size: 1.6rem;
 `;
 
 const BtnList = styled.div`
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  row-gap: 0.5rem;
+  padding-right: 0.5rem;
 `;
 
-const AddBtn = styled.button``;
-const InviteBtn = styled.button``;
+const Btn = styled.button`
+  width: 8rem;
+  height: 2.5rem;
+  padding: 0;
+  border: none;
+
+  background-color: #81c6e8;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5rem;
+`;
 
 const FriendsHeader = () => {
   const navigate = useNavigate();
@@ -39,10 +55,10 @@ const FriendsHeader = () => {
     <Main>
       <Header>친구목록</Header>
       <BtnList>
-        <AddBtn onClick={addFriends}>친구 추가하기</AddBtn>
-        <InviteBtn onClick={() => navigate("/friends/response-list")}>
+        <Btn onClick={addFriends}>친구 추가하기</Btn>
+        <Btn onClick={() => navigate("/friends/response-list")}>
           친구 요청목록
-        </InviteBtn>
+        </Btn>
       </BtnList>
     </Main>
   );
