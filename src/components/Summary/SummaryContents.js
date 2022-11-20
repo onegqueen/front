@@ -37,6 +37,15 @@ const Content = styled.textarea.attrs(() => ({
   }
 `;
 
+const RegisterBtn = styled.button`
+  background-color: #395b64;
+  border: none;
+  border-radius: 0.5rem;
+
+  width: 10rem;
+  height: 3rem;
+`;
+
 const SummaryContents = (props) => {
   const { summary, setSummary, keyword } = props;
 
@@ -93,9 +102,8 @@ const SummaryContents = (props) => {
           onChange={changeSummary}
           onKeyDown={clickTab}
         ></Content>
+        <RegisterBtn onClick={registerSummary}>등록하기</RegisterBtn>
       </InputDiv>
-
-      <button onClick={registerSummary}>등록하기</button>
     </Main>
   );
 };
