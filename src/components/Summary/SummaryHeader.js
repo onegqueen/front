@@ -37,9 +37,8 @@ const KeywordBtn = styled.button`
 const SummaryHeader = (props) => {
   const { keyword, setKeyword } = props;
 
-  const selectKeyword = (e) => {
-    const { name } = e.target;
-    setKeyword(name);
+  const selectKeyword = (e, type) => {
+    setKeyword(type);
   };
 
   return (
@@ -47,30 +46,30 @@ const SummaryHeader = (props) => {
       <Title>오늘의 요약</Title>
       <KeywordTitle>요약할 영역 : {keyword}</KeywordTitle>
       <KeywordList>
-        <KeywordBtn name="프론트엔드" onClick={selectKeyword}>
+        <KeywordBtn
+          name="프론트엔드"
+          onClick={(e) => selectKeyword(e, "프론트엔드")}
+        >
           프론트엔드
         </KeywordBtn>
-        <KeywordBtn name="백엔드" onClick={selectKeyword}>
+        <KeywordBtn onClick={(e) => selectKeyword(e, "백엔드")}>
           백엔드
         </KeywordBtn>
-        <KeywordBtn name="알고리즘" onClick={selectKeyword}>
-          알고리즘
-        </KeywordBtn>
-        <KeywordBtn name="운영체제" onClick={selectKeyword}>
-          운영체제
-        </KeywordBtn>
-        <KeywordBtn name="Android" onClick={selectKeyword}>
+        <KeywordBtn onClick={(e) => selectKeyword(e, "Android")}>
           Android
         </KeywordBtn>
-        <KeywordBtn name="IOS" onClick={selectKeyword}>
-          IOS
+        <KeywordBtn onClick={(e) => selectKeyword(e, "IOS")}>IOS</KeywordBtn>
+        <KeywordBtn onClick={(e) => selectKeyword(e, "알고리즘")}>
+          알고리즘
         </KeywordBtn>
-        <KeywordBtn name="Database" onClick={selectKeyword}>
+        <KeywordBtn onClick={(e) => selectKeyword(e, "운영체제")}>
+          운영체제
+        </KeywordBtn>
+
+        <KeywordBtn onClick={(e) => selectKeyword(e, "Database")}>
           Database
         </KeywordBtn>
-        <KeywordBtn name="C.S" onClick={selectKeyword}>
-          C.S
-        </KeywordBtn>
+        <KeywordBtn onClick={(e) => selectKeyword(e, "C.S")}>C.S</KeywordBtn>
       </KeywordList>
     </Main>
   );

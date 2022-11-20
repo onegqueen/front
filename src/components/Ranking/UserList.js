@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import apiClient from "../libs/api/apiClient";
+import apiClient from "../../libs/api/apiClient";
 import { useState, useEffect } from "react";
-import UserAPI from '../libs/api/user';
-import Pagination from "./Pagination";
+import UserAPI from '../../libs/api/user';
+import Pagination from "../Pagination";
 
 /*https://data05.tistory.com/118?category=995051*/
 const Rank = styled.ul`
@@ -21,13 +21,10 @@ const Rank_content = styled.li`
     margin-bottom:1px;
     padding-top:5px;
     padding-bottom:5px;
-
     display:flex;
     flex-direction:row;
     justify-content:space-between;
     align-items:center;
-
-
     /*border*/
     border-style: solid;
     border-color:gray;
@@ -54,7 +51,6 @@ const UserStudyTime = styled.span`
     margin-right:30px;
     align-items:center;
     background-color:beige;
-
 `
 
 export default function UserList(){

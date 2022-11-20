@@ -1,34 +1,44 @@
 import styled from "styled-components";
-import { useState } from "react";
-import ReactMarkdown from "react-markdown";
+import axios from "axios";
 
-const Main = styled.div`
-  width: 350px;
+const Main = styled.div``;
+
+const InputDiv = styled.div`
+  width: 38rem;
   margin: 0 auto;
 `;
 
 const Title = styled.input.attrs(() => ({
-  placeholder: "제목",
+  placeholder: "제목을 입력하세요.",
 }))`
-  width: 100%;
+  width: 38rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  background-color: inherit;
+  border: 1px solid black;
+  :focus {
+    outline: none;
+  }
 `;
 const Content = styled.textarea.attrs(() => ({
-  placeholder: "내용",
+  placeholder: "내용을 입력하세요.",
 }))`
-  width: 100%;
-  height: 200px;
+  width: 38rem;
+  height: 20rem;
   resize: none;
+  tab-size: 1rem;
+  overflow: auto;
+  margin: 1rem 0;
+  border: 1px solid black;
+  background-color: inherit;
+  :focus {
+    outline: none;
+  }
 `;
 
-const RegisterBtn = styled.button``;
-
 const SummaryContents = (props) => {
-  const { keyword } = props;
-  const [summary, setSummary] = useState({
-    title: "",
-    content: "",
-    keyword: keyword,
-  });
+  const { summary, setSummary, keyword } = props;
 
   const changeSummary = (e) => {
     const { name, value } = e.target;
@@ -48,24 +58,44 @@ const SummaryContents = (props) => {
     }
   };
 
-  console.log(summary);
+  const registerSummary = async () => {
+    try {
+      const res = await axios({
+        method: "post",
+        // url: `/api/post/summary/${summary.keyword}`,
+        url: "/apis/post/summary/frontend",
+        data: {
+          topic: summary.title,
+          content: summary.content,
+        },
+      });
+
+      console.log(res);
+    } catch (error) {
+      const err = error.response.data;
+      console.log(err);
+    }
+  };
 
   return (
     <Main>
-      <Title
-        name="title"
-        value={summary.title}
-        onChange={changeSummary}
-      ></Title>
-      <Content
-        name="content"
-        value={summary.content}
-        onChange={changeSummary}
-        onKeyDown={clickTab}
-      ></Content>
-      <div>미리보기</div>
-      <ReactMarkdown children={summary.content} />
-      <RegisterBtn>등록하기</RegisterBtn>
+      <InputDiv>
+        <Title
+          name="topic"
+          value={summary.topic}
+          onChange={changeSummary}
+        ></Title>
+      </InputDiv>
+      <InputDiv>
+        <Content
+          name="content"
+          value={summary.content}
+          onChange={changeSummary}
+          onKeyDown={clickTab}
+        ></Content>
+      </InputDiv>
+
+      <button onClick={registerSummary}>등록하기</button>
     </Main>
   );
 };

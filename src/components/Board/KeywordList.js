@@ -72,7 +72,7 @@ export default function KeywordList(){
                 {currentPosts.map((Key)=>(
                     <Content key={Key.key}>
                             <Word>
-                                <Link to ="/keyword/:id">{Key.key}</Link>
+                                <Link to ={`/keyword/${Key.key}`}>{Key.key}</Link>
                             </Word>
                     </Content>
                 ))}
