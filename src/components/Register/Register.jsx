@@ -65,7 +65,6 @@ const Register = () => {
         onChange={onPasswordCheckHandler}
       />
       <S.PasswordCheck onClick={onCheck}>비밀번호 재확인</S.PasswordCheck>
-
       <S.SubmitButton type="submit" onClick={navigateToLogin}>
         "Register!"
       </S.SubmitButton>
