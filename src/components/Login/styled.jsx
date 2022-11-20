@@ -50,7 +50,13 @@ const Input = styled.input`
   }
 `;
 
-const LoginButton = styled.div``;
+const LoginButton = styled.div`
+  height: 48px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  color: black;
+`;
 
 const RegisterButton = styled.div`
   width: 100%;
