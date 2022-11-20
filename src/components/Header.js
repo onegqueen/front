@@ -18,5 +18,6 @@ export default function Header() {
         <a href="/login"> 로그인 </a>
       </h1>
     </Header_bar>
+
   );
 }
