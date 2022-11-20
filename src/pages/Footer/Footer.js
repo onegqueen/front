@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const FooterDiv = styled.footer`
   text-align: center;
-  background-color: gray;
+  background-color: #395b64;
   font-size: 1.6rem;
   height: 3rem;
   color: white;
@@ -10,12 +10,14 @@ const FooterDiv = styled.footer`
   justify-content: space-between;
 `;
 
-const Content = styled.div``;
+const Content = styled.div`
+  margin: 0 auto;
+`;
 
 const Footer = () => {
   return (
     <FooterDiv>
-      <Content>Footer</Content>
+      <Content>Copyright ~~~</Content>
     </FooterDiv>
   );
 };

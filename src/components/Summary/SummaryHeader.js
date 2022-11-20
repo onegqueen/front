@@ -28,7 +28,7 @@ const KeywordBtn = styled.button`
   height: 30px;
   border: none;
 
-  background-color: #81c6e8;
+  background-color: #395b64;
   color: white;
   cursor: pointer;
   border-radius: 0.5rem;

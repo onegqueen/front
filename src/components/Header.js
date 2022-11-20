@@ -8,6 +8,7 @@ const Headerbar = styled.div`
   flex-wrap: wrap;
   align-items: center;
   align-content: center;
+
   height: 30px;
 `;
 
