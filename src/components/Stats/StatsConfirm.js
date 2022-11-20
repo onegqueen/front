@@ -35,14 +35,12 @@ const StatPlusBtn = styled.button`
   padding: 0;
   border: none;
 
-  background-color: #81c6e8;
+  background-color: #395b64;
   color: white;
   cursor: pointer;
   border-radius: 0.5rem;
 `;
-const StatMinusBtn = styled(StatPlusBtn)`
-  background-color: #5da7db;
-`;
+const StatMinusBtn = styled(StatPlusBtn)``;
 
 const ConfirmBtn = styled.button`
   width: 20rem;
@@ -51,7 +49,7 @@ const ConfirmBtn = styled.button`
   border: none;
   margin-top: 2rem;
 
-  background-color: #5f9df7;
+  background-color: #395b64;
   color: white;
   cursor: pointer;
   border-radius: 1rem;
