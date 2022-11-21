@@ -8,26 +8,18 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   //아이디
-  const onIdHandler = (e) => {
-    setId(e.currentTarget.value);
+  const onIdHandler = (event) => {
+    setId(event.currentTarget.value);
   };
 
   //비밀번호
-  const onPasswordHandler = (e) => {
-    setPassword(e.currentTarget.value);
+  const onPasswordHandler = (event) => {
+    setPassword(event.currentTarget.value);
   };
 
   //로그인
-  const navigate = useNavigate();
-  const navigateToAccount = () => {
-    navigate("/MyAccount");
-    return alert("Login Success !!");
-  };
-
-  // 회원가입 페이지 이동
-  const navigate1 = useNavigate();
-  const navigateToRegister = () => {
-    navigate1("/Register");
+  const onSubmit = (event) => {
+    event.preventDefault();
   };
 
   return (
@@ -47,7 +39,7 @@ const Login = () => {
           placeholder="비밀번호"
         />
         <div>
-          <S.LoginButton type="submit" onClick={navigateToAccount}>
+          <S.LoginButton type="submit" onSubmit={onSubmit}>
             Login
           </S.LoginButton>
         </div>
