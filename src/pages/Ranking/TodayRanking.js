@@ -1,5 +1,5 @@
 import Rankbar from "../../components/Ranking/Rankbar"
-import UserList from "../../components/UserList"
+import UserList from "../../components/Ranking/UserList"
 import{BrowserRouter,Route,Routes} from "react-router-dom";
 
 export default function TodayRank(){
@@ -11,4 +11,4 @@ export default function TodayRank(){
         
     )
 }
-
+/**/

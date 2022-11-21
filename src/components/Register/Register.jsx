@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import S from "./styled";
 
 const Register = () => {
@@ -42,6 +42,7 @@ const Register = () => {
         value={password}
         onChange={onPasswordHandler}
       />
+
       <S.Input
         type="password"
         placeholder="check password one more"

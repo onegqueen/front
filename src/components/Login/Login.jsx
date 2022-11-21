@@ -1,5 +1,5 @@
 import S from "./styled";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -45,12 +45,11 @@ const Login = () => {
         </div>
         <div>
           <S.snsLogin>Google</S.snsLogin>
-          <S.snsLogin>Naver</S.snsLogin>
           <S.snsLogin>KaKao</S.snsLogin>
         </div>
       </S.Form>
-      <S.RegisterButton>
-        <Link to={"/register"}>"Link for Register"</Link>
+      <S.RegisterButton onClick={navigateToRegister}>
+        "Link for Register"
       </S.RegisterButton>
     </S.Container>
   );
