@@ -20,11 +20,24 @@ const Register = () => {
     setPassword(event.currentTarget.value);
   };
 
-  const onSubmit = (event) => {
+  const onPasswordCheckHandler = (event) => {
+    setConfirmPassword(event.currentTarget.value);
+  };
+
+  const onCheck = (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
-      return alert("비밀번호 확인을 다시 한 번 해주십시오.");
+      return alert("비밀번호를 다시 한 번 확인 해주십시오.");
+    } else if (password === confirmPassword) {
+      return alert("비밀번호가 일치합니다. 회원가입을 진행해주세요.");
     }
+  };
+
+  //회원가입 후 로그인 페이지 이동
+  const navigate = useNavigate();
+  const navigateToLogin = () => {
+    navigate("/Login");
+    return alert("Register Success !!");
   };
 
   return (
@@ -49,7 +62,8 @@ const Register = () => {
         value={confirmPassword}
         onChange={onPasswordHandler}
       />
-      <S.SubmitButton type="button" onChange={onSubmit}>
+      <S.PasswordCheck onClick={onCheck}>비밀번호 재확인</S.PasswordCheck>
+      <S.SubmitButton type="submit" onClick={navigateToLogin}>
         "Register!"
       </S.SubmitButton>
     </S.Container>
