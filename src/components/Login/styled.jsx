@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Container = styled.div`
   position: absolute;
@@ -10,7 +10,8 @@ const Container = styled.div`
   left: 50%;
   transform: translate(-50%, 0);
   margin-top: 40px;
-  background-color: #f7f7f7;
+  margin-bottom: 40px;
+  background-color: #e7f6f2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,6 +56,7 @@ const LoginButton = styled.div`
   border: none;
   font-weight: 700;
   color: black;
+  cursor: pointer;
 `;
 
 const RegisterButton = styled.div`
@@ -62,7 +64,7 @@ const RegisterButton = styled.div`
   height: 48px;
   border: none;
   font-weight: 700;
-  background-color: #d266f0;
+  background-color: #395b64;
   border-radius: 64px;
   color: white;
   margin-bottom: 16px;

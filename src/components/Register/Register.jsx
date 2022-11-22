@@ -3,13 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import S from "./styled";
 
 const Register = () => {
-  const [name, setName] = useState("");
+  const [Nickname, setNickname] = useState("");
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const onNameHandler = (event) => {
-    setName(event.currentTarget.value);
+  const onNicknameHandler = (event) => {
+    setNickname(event.currentTarget.value);
   };
 
   const onIdHandler = (event) => {
@@ -42,11 +42,12 @@ const Register = () => {
 
   return (
     <S.Container>
+      <S.Title>Register Page</S.Title>
       <S.Input
         type="text"
-        value={name}
-        onChange={onNameHandler}
-        placeholder="name"
+        value={Nickname}
+        onChange={onNicknameHandler}
+        placeholder="Nickname"
       />
       <S.Input type="text" placeholder="id" value={id} onChange={onIdHandler} />
       <S.Input
@@ -55,12 +56,11 @@ const Register = () => {
         value={password}
         onChange={onPasswordHandler}
       />
-
       <S.Input
         type="password"
         placeholder="check password one more"
         value={confirmPassword}
-        onChange={onPasswordHandler}
+        onChange={onPasswordCheckHandler}
       />
       <S.PasswordCheck onClick={onCheck}>비밀번호 재확인</S.PasswordCheck>
       <S.SubmitButton type="submit" onClick={navigateToLogin}>

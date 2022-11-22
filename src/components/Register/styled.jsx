@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Container = styled.div`
   position: absolute;
@@ -6,13 +6,14 @@ const Container = styled.div`
   bottom: 0;
   width: 100%;
   max-width: 500px;
+
   left: 50%;
   transform: translate(-50%, 0);
-  background: #f7f7f7;
-  border-radius: 16px;
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04);
+  background: #e7f6f2;
+  padding: 0 20px;
+  //box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04);
   margin: 0 auto; /*페이지 중앙에 나타나도록 설정*/
-  margin-top: 96px;
+  margin-top: 32px;
   margin-bottom: 32px;
   display: flex;
   flex-direction: column;
@@ -33,6 +34,7 @@ const Input = styled.input`
   & + & {
     margin-top: 1rem;
   }
+  color: black;
 `;
 
 const SubmitButton = styled.button`
@@ -40,14 +42,13 @@ const SubmitButton = styled.button`
   height: 48px;
   border: none;
   font-weight: 700;
-  background-color: #d266f0;
+  background-color: #395b64;
   border-radius: 64px;
   color: white;
   margin-bottom: 16px;
   text-align: center;
   cursor: pointer;
 `;
-
 
 const Title = styled.div`
   margin-top: 67px;
@@ -59,7 +60,9 @@ const Title = styled.div`
   color: #262626;
 `;
 
-const PasswordCheck = styled.button``;
+const PasswordCheck = styled.button`
+  color: black;
+`;
 
 const S = {
   Input,

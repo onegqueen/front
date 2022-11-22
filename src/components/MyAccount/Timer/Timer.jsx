@@ -49,7 +49,7 @@ const Timer = () => {
 
   return (
     <div className="app">
-      <h3>Study Timer</h3>
+      <h3>Your Coding Timer</h3>
       <div className="stopwatch-card">
         <p>{formatTime()}</p>
         <div className="buttons">
