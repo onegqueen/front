@@ -49,6 +49,7 @@ const Input = styled.input`
   & + & {
     margin-top: 1rem;
   }
+  color: black;
 `;
 
 const LoginButton = styled.div`
@@ -69,10 +70,19 @@ const RegisterButton = styled.div`
   color: white;
   margin-bottom: 16px;
   text-align: center;
+
   cursor: pointer;
 `;
 
-const snsLogin = styled.button``;
+const snsLogin = styled.button`
+  outline: none;
+  background: transparent;
+  border: 1px solid blue;
+  padding: 5px 10px;
+  border-radius: 7px;
+  color: #395b64;
+  cursor: pointer;
+`;
 
 const S = {
   Container,

@@ -6,7 +6,6 @@ const Container = styled.div`
   bottom: 0;
   width: 100%;
   max-width: 500px;
-
   left: 50%;
   transform: translate(-50%, 0);
   background: #e7f6f2;
@@ -47,6 +46,7 @@ const SubmitButton = styled.button`
   color: white;
   margin-bottom: 16px;
   text-align: center;
+
   cursor: pointer;
 `;
 
@@ -60,16 +60,11 @@ const Title = styled.div`
   color: #262626;
 `;
 
-const PasswordCheck = styled.button`
-  color: black;
-`;
-
 const S = {
   Input,
   Container,
   SubmitButton,
   Title,
-  PasswordCheck,
 };
 
 export default S;

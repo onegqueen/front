@@ -1,12 +1,13 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import S from "./styled";
 
 const Register = () => {
-  const [Nickname, setNickname] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [checknick, setChecknick] = useState("");
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
   const onNicknameHandler = (event) => {
     setNickname(event.currentTarget.value);
@@ -20,24 +21,27 @@ const Register = () => {
     setPassword(event.currentTarget.value);
   };
 
-  const onPasswordCheckHandler = (event) => {
-    setConfirmPassword(event.currentTarget.value);
-  };
-
-  const onCheck = (event) => {
-    event.preventDefault();
-    if (password !== confirmPassword) {
-      return alert("비밀번호를 다시 한 번 확인 해주십시오.");
-    } else if (password === confirmPassword) {
-      return alert("비밀번호가 일치합니다. 회원가입을 진행해주세요.");
-    }
-  };
-
   //회원가입 후 로그인 페이지 이동
   const navigate = useNavigate();
-  const navigateToLogin = () => {
-    navigate("/Login");
-    return alert("Register Success !!");
+
+  const joinUser = async () => {
+    try {
+      const res = await axios({
+        method: "post",
+        url: "/apis/auth/join",
+        data: {
+          id,
+          pw: password,
+          nickname,
+        },
+      });
+      console.log(res);
+      navigate("/Login");
+      return alert("Successs Login!");
+    } catch (error) {
+      const err = error.response.data;
+      console.log(err);
+    }
   };
 
   return (
@@ -45,10 +49,11 @@ const Register = () => {
       <S.Title>Register Page</S.Title>
       <S.Input
         type="text"
-        value={Nickname}
+        value={nickname}
         onChange={onNicknameHandler}
         placeholder="Nickname"
       />
+
       <S.Input type="text" placeholder="id" value={id} onChange={onIdHandler} />
       <S.Input
         type="password"
@@ -56,14 +61,8 @@ const Register = () => {
         value={password}
         onChange={onPasswordHandler}
       />
-      <S.Input
-        type="password"
-        placeholder="check password one more"
-        value={confirmPassword}
-        onChange={onPasswordCheckHandler}
-      />
-      <S.PasswordCheck onClick={onCheck}>비밀번호 재확인</S.PasswordCheck>
-      <S.SubmitButton type="submit" onClick={navigateToLogin}>
+
+      <S.SubmitButton type="submit" onClick={joinUser}>
         "Register!"
       </S.SubmitButton>
     </S.Container>
