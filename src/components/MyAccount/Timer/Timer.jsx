@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import "./Timer.css";
+import axios from "axios";
 
 const element = <FontAwesomeIcon icon={faClock} />;
 
@@ -12,7 +13,7 @@ const Timer = () => {
   const [isPaused, setIsPaused] = useState(false);
   const countRef = useRef(null);
 
-  const TimeStart = () => {
+  const TimeStart = async () => {
     setIsActive(true);
     setIsPaused(true);
     countRef.current = setInterval(() => {
@@ -49,7 +50,8 @@ const Timer = () => {
 
   return (
     <div className="app">
-      <h3>Study Timer</h3>
+      <h2>Your Coding Timer</h2>
+      <h3>!You are a coding king!</h3>
       <div className="stopwatch-card">
         <p>{formatTime()}</p>
         <div className="buttons">

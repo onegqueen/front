@@ -7,6 +7,8 @@ const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   //아이디
   const onIdHandler = (event) => {
     setId(event.currentTarget.value);
@@ -18,16 +20,27 @@ const Login = () => {
   };
 
   // 로그인
-  const navigate = useNavigate();
-  const navigateToAccount = () => {
+  const login = async () => {
     navigate("/MyAccount");
-    return alert("Login success !!");
+    try {
+      const res = await axios({
+        method: "post",
+        url: "/apis/auth/login",
+        data: {
+          id,
+          pw: password,
+        },
+      });
+      console.log(res);
+    } catch (error) {
+      const err = error.response.data;
+      console.log(err);
+    }
   };
 
   // 회원가입 링크
-  const navigate1 = useNavigate();
   const navigateToRegister = () => {
-    navigate1("/Register");
+    navigate("/Register");
   };
 
   return (
@@ -47,7 +60,7 @@ const Login = () => {
           placeholder="비밀번호"
         />
         <div>
-          <S.LoginButton type="submit" onClick={navigateToAccount}>
+          <S.LoginButton type="submit" onClick={login}>
             Login
           </S.LoginButton>
         </div>
