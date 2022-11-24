@@ -15,6 +15,7 @@ import Pagination from "./components/Pagination";
 import Friends from "./pages/Friends/Friends";
 import FriendsResponse from "./pages/Friends/FriendsResponse";
 import Footer from "./pages/Footer/Footer";
+import axios from "axios";
 
 const AllWrapper = styled.div`
   display: flex;
@@ -26,6 +27,7 @@ const ContentWrapper = styled.div`
   flex: 1;
 `;
 
+axios.defaults.withCredentials = true;
 function App() {
   return (
     <AllWrapper>
