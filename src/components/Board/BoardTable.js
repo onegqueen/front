@@ -2,20 +2,27 @@ import styled from 'styled-components';
 import apiClient from "../../libs/api/apiClient";
 import { useState, useEffect } from "react";
 import UserAPI from '../../libs/api/user';
-import Pagination from "../Pagination";
+import Pagination from "../NewPagination";
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
+const Body = styled.body`
+background-color:#2C3333;
+`
+const ContentList = styled.ul`
+`
 const Header = styled.ul`
-    background-color:gray;
+    color:#E7F6F2;
+    background-color:#2C3333;
     font-size:15px;
     margin-bottom:1px;
     padding-top:5px;
     padding-bottom:5px;
-    padding-left:0px;
+    padding-left:10px;
 
 
     display:grid;
-    grid-template-columns: 20% 25% 12% 10% 20%;
+    grid-template-columns: 5% 17% 16% 16.5% 11% 11%;
 
 
     flex-direction:row;
@@ -48,14 +55,15 @@ const Content = styled.li`
     margin-bottom:1px;
     padding-top:5px;
     padding-bottom:5px;
+    padding-left:10px;
 
     display:grid;
-    grid-template-columns: 5% 30% 20% 7% 20%;
+    grid-template-columns: 3% 20% 20% 20% 7% 15%;
 
 
     flex-direction:row;
     justify-content:space-between;
-    /*align-items:center;*/
+    align-items:center;
 
 
     /*border*/
@@ -72,60 +80,76 @@ const Topic = styled.span`
 `
 const Category = styled.span`
 `
+const Writer = styled.span`
+`
 const Like = styled.b`
 `
 const Date = styled.b`
 `
 
-export default function Board(){
+export default function BoardTable(){
     const [contentList, setContentList] = useState([])
-
-    useEffect( () => {
-        fetch('http://localhost:3001/contents/3')
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data)
-    setContentList(data.data)
-  });
-
-    }, [])
-
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+   
+    const [page, setPage] = useState(1);
+    const handlePageChange = (page)=>{setPage(page);};
     
-    const[currentPage, setCurrentPage]=useState(1);
-    const[postPerPage]=useState(10)
-    
-    const indexOfLastPost=currentPage * postPerPage;
-    const indexOfFirstPost=indexOfLastPost - postPerPage;
-    const currentPosts=contentList.slice(indexOfFirstPost,indexOfLastPost);
+    useEffect(() => {
+      const fetchBoard = async (page) => {
+        try {
+          setError(null);
+          setContentList(null);
+          setLoading(true);
+          const response = await axios.get(
+            `http://localhost:3001/contents/3`
+          );
+          console.log(response.data)
+          console.log(response.data.data)
+          setContentList(response.data.data);
+        } catch (e) {
+          setError(e);
+        }
+        setLoading(false);
+      };
 
-    const paginate = pageNum => setCurrentPage(pageNum);
+  
+      fetchBoard(page);
+    }, []);
+
+    if (loading) return <div>로딩중..</div>;
+    if (error) return <div>에러가 발생했습니다</div>;
+    if (!contentList) return null;  
+
 
     return(
-        <>
-            
+        <Body>
             <Keywords className = "keylist">
                 <Header>
                     <Num>글 번호</Num>
                     <Topic>글 제목</Topic>
-                    <Category>주제</Category>
+                  <Category>주제</Category>
+                    <Writer>작성자</Writer>
                     <Like>좋아요 수</Like>
                     <Date>작성일자</Date>
                 </Header>
-                {currentPosts.map((Post)=>(
+                {contentList.map((Post)=>(
                     <Content key={Post.id}>
                             <Num>{contentList.indexOf(Post)+1}</Num>
-                            <Topic>{Post.topic}</Topic>
+                            <Topic>
+                                <Link to = {`./${Post.id}`}>{Post.topic}</Link>
+                            </Topic>
                             <Category>{Post.category}</Category>
+                            <Writer>{Post.id}</Writer>
                             <Like>{Post.likes}</Like>
                             <Date>{Post.date}</Date>
                     </Content>
                 ))}
             </Keywords>
             <Pagination 
-                postPerPage = {postPerPage}
-                totalPosts={contentList.length}
-                paginate={paginate}/>
-        </>
+                totalPageCount={10}
+                onChange = {handlePageChange}/>
+        </Body>
     );
 
 }

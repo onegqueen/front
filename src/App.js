@@ -12,6 +12,8 @@ import RegisterPage from "./pages/RegisterPage";
 import MyAccountPage from "./pages/MyAccountPage";
 import UserList from "./components/Ranking/UserList";
 import Pagination from "./components/Pagination";
+import CorsArticle from "./pages/Board/CorsArticle";
+import CommentContents from "./components/Board/Comment";
 
 function App() {
   return (
@@ -29,7 +31,7 @@ function App() {
         <Route path="/userlist" element={<UserList />}></Route>
         <Route path="/rank" element={<TodayRank />}></Route>
         <Route path="/board" element={<AllContent />}></Route>
-        <Route path="/test" element={<UserList />}></Route>
+        <Route path="/article" element={<CorsArticle />}></Route>
       </Routes>
     </>
   );

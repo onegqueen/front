@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 
+
 const Page = styled.ul`
     text-align:center;
 `
@@ -21,10 +22,10 @@ const Click = styled.a`
         background-color:yellow;
     }
 `
-const Pagination = ({postPerPage,totalPosts,paginate})=>{
+const Pagination = ({totalPageCount,onChange})=>{
     const pageNumbers=[];
 
-    for (let i=1; i<Math.ceil(totalPosts/postPerPage)+1;i++){
+    for (let i=1; i<Math.ceil(totalPageCount)+1;i++){
         pageNumbers.push(i);
     }
     
@@ -34,8 +35,8 @@ const Pagination = ({postPerPage,totalPosts,paginate})=>{
             <Page className="pagination">
                 {pageNumbers.map(num=>
                     <Pagenum key = {num}>
-                        <Click onClick={()=> paginate(num)}>
-                            <Link to={`./`}>{num}</Link>
+                        <Click onClick={()=> onChange(num)}>
+                            <Link to={`./${num}`}>{num}</Link>
                         </Click>
                     </Pagenum>)}
 
