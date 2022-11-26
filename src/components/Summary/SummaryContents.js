@@ -1,39 +1,64 @@
 import styled from "styled-components";
 import axios from "axios";
+import settingCookie from "../../utils/settingCookie";
 
-const Main = styled.div``;
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { Editor } from "@toast-ui/react-editor";
+import { useRef, useState } from "react";
 
-const InputDiv = styled.div`
-  width: 38rem;
-  margin: 0 auto;
+const Main = styled.div`
+  font-size: 1rem;
+
+  .toastui-editor-contents p {
+    font-size: 13px;
+  }
+
+  .toastui-editor-contents * {
+    color: #f7f7f7;
+    background-color: #2c3333;
+  }
+
+  .toastui-editor-md-preview .toastui-editor-contents * {
+    color: #f7f7f7;
+    text-align: left;
+    background-color: #2c3333;
+  }
+
+  .toastui-editor-defaultUI-toolbar :nth-child(4) {
+    display: none;
+  }
+  .toastui-editor-toolbar-icons.codeblock {
+    display: none;
+  }
+  .toastui-editor-popup-add-heading * {
+    background-color: #2c3333;
+    text-align: left;
+  }
+
+  .toastui-editor-md-code-block-line-background {
+    background-color: #2c3333;
+  }
+
+  .toastui-editor-defaultUI-toolbar .scroll-sync::before {
+    color: #00a9ff;
+  }
 `;
 
 const Title = styled.input.attrs(() => ({
   placeholder: "제목을 입력하세요.",
 }))`
-  width: 38rem;
+  width: 50rem;
   height: 3rem;
   font-size: 1.5rem;
   margin: 1rem 0;
+  color: #f7f7f7;
   background-color: inherit;
-  border: 1px solid black;
+  border: 1px solid #f7f7f7;
   :focus {
     outline: none;
   }
-`;
-const Content = styled.textarea.attrs(() => ({
-  placeholder: "내용을 입력하세요.",
-}))`
-  width: 38rem;
-  height: 20rem;
-  resize: none;
-  tab-size: 1rem;
-  overflow: auto;
-  margin: 1rem 0;
-  border: 1px solid black;
-  background-color: inherit;
-  :focus {
-    outline: none;
+  ::placeholder {
+    color: #f7f7f7;
   }
 `;
 
@@ -41,41 +66,42 @@ const RegisterBtn = styled.button`
   background-color: #395b64;
   border: none;
   border-radius: 0.5rem;
-
+  font-family: SCDream5;
   width: 10rem;
   height: 3rem;
 `;
 
+const BtnList = styled.div`
+  margin: 2rem 0 0 2rem;
+`;
+
 const SummaryContents = (props) => {
-  const { summary, setSummary, keyword } = props;
+  const { keyword } = props;
 
-  const changeSummary = (e) => {
-    const { name, value } = e.target;
-    setSummary({ ...summary, [name]: value });
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const editorRef = useRef();
+
+  // 제목 변경
+  const changeTitle = (e) => {
+    const { value } = e.target;
+    setTitle(value);
   };
 
-  const clickTab = (e) => {
-    if (e.keyCode === 9) {
-      e.preventDefault();
-      let val = e.target.value;
-      let start = e.target.selectionStart;
-      let end = e.target.selectionEnd;
-      e.target.value = val.substring(0, start) + "\t" + val.substring(end);
-      e.target.selectionStart = e.target.selectionEnd = start + 1;
-      changeSummary(e);
-      return false;
-    }
-  };
-
+  // 요약 등록
   const registerSummary = async () => {
+    const token = settingCookie("get-access");
+
     try {
       const res = await axios({
-        method: "post",
-        // url: `/api/post/summary/${summary.keyword}`,
-        url: "/apis/post/summary/frontend",
+        method: "get",
+        url: `/api/auth/validate/${keyword}`,
         data: {
-          topic: summary.title,
-          content: summary.content,
+          topic: title,
+          content: content,
+        },
+        headers: {
+          Authorization: `${token}`,
         },
       });
 
@@ -88,22 +114,22 @@ const SummaryContents = (props) => {
 
   return (
     <Main>
-      <InputDiv>
-        <Title
-          name="topic"
-          value={summary.topic}
-          onChange={changeSummary}
-        ></Title>
-      </InputDiv>
-      <InputDiv>
-        <Content
-          name="content"
-          value={summary.content}
-          onChange={changeSummary}
-          onKeyDown={clickTab}
-        ></Content>
+      <Title value={title} onChange={changeTitle}></Title>
+      <Editor
+        initialValue="내용을 입력하세요."
+        previewStyle="vertical"
+        height="600px"
+        initialEditType="markdown"
+        useCommandShortcut={false}
+        ref={editorRef}
+        onChange={() => {
+          const content = editorRef.current.getInstance().getMarkdown();
+          setContent(content);
+        }}
+      />
+      <BtnList>
         <RegisterBtn onClick={registerSummary}>등록하기</RegisterBtn>
-      </InputDiv>
+      </BtnList>
     </Main>
   );
 };

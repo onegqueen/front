@@ -5,14 +5,13 @@ import "../../App.css";
 
 import SummaryHeader from "../../components/Summary/SummaryHeader";
 import SummaryContents from "../../components/Summary/SummaryContents";
-import SummaryPreview from "../../components/Summary/SummaryPreview";
 
 const Main = styled.div`
   display: flex;
   height: calc(100% - 30px);
   align-items: center;
   margin: 0 auto;
-  width: 85rem;
+  width: 100rem;
   font-family: SCDream5;
 `;
 
@@ -29,7 +28,7 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.div`
-  width: 40rem;
+  width: 100rem;
   padding: 2rem 0;
   border: 0.3rem solid #395b64;
 `;
@@ -38,27 +37,18 @@ const Preview = styled(Content)`
 `;
 
 const Summary = () => {
-  const [keyword, setKeyword] = useState("프론트엔드");
-
-  const [summary, setSummary] = useState({
-    topic: "",
-    content: "",
-  });
+  const [keyword, setKeyword] = useState("Front-end");
 
   return (
     <Main>
       <Wrapper>
         <Content>
           <SummaryHeader keyword={keyword} setKeyword={setKeyword} />
-          <SummaryContents
-            summary={summary}
-            setSummary={setSummary}
-            keyword={keyword}
-          />
+          <SummaryContents keyword={keyword} />
         </Content>
-        <Preview>
+        {/* <Preview>
           <SummaryPreview summary={summary} keyword={keyword} />
-        </Preview>
+        </Preview> */}
       </Wrapper>
     </Main>
   );

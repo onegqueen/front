@@ -19,17 +19,17 @@ const KeywordList = styled.div`
   padding: 0 2rem;
   margin: 1rem 0;
 
-  grid-template-columns: repeat(3, 100px);
-  grid-row-gap: 1rem;
+  grid-template-columns: repeat(6, 12rem);
+  grid-row-gap: 2rem;
   justify-content: space-between;
 `;
 const KeywordBtn = styled.button`
-  width: 100px;
-  height: 30px;
+  width: 12rem;
+  height: 3rem;
   border: none;
 
   background-color: #395b64;
-  color: white;
+  color: #f7f7f7;
   cursor: pointer;
   border-radius: 0.5rem;
 `;
@@ -46,29 +46,14 @@ const SummaryHeader = (props) => {
       <Title>오늘의 요약</Title>
       <KeywordTitle>요약할 영역 : {keyword}</KeywordTitle>
       <KeywordList>
-        <KeywordBtn
-          name="프론트엔드"
-          onClick={(e) => selectKeyword(e, "프론트엔드")}
-        >
-          프론트엔드
-        </KeywordBtn>
-        <KeywordBtn onClick={(e) => selectKeyword(e, "백엔드")}>
-          백엔드
-        </KeywordBtn>
-        <KeywordBtn onClick={(e) => selectKeyword(e, "Android")}>
-          Android
-        </KeywordBtn>
+        <KeywordBtn onClick={(e) => selectKeyword(e, "Front-end")}>Front-end</KeywordBtn>
+        <KeywordBtn onClick={(e) => selectKeyword(e, "Back-end")}>Back-end</KeywordBtn>
+        <KeywordBtn onClick={(e) => selectKeyword(e, "Android")}>Android</KeywordBtn>
         <KeywordBtn onClick={(e) => selectKeyword(e, "IOS")}>IOS</KeywordBtn>
-        <KeywordBtn onClick={(e) => selectKeyword(e, "알고리즘")}>
-          알고리즘
-        </KeywordBtn>
-        <KeywordBtn onClick={(e) => selectKeyword(e, "운영체제")}>
-          운영체제
-        </KeywordBtn>
+        <KeywordBtn onClick={(e) => selectKeyword(e, "Algorithm")}>Algorithm</KeywordBtn>
+        <KeywordBtn onClick={(e) => selectKeyword(e, "O/S")}>O/S</KeywordBtn>
 
-        <KeywordBtn onClick={(e) => selectKeyword(e, "Database")}>
-          Database
-        </KeywordBtn>
+        <KeywordBtn onClick={(e) => selectKeyword(e, "Database")}>Database</KeywordBtn>
         <KeywordBtn onClick={(e) => selectKeyword(e, "C.S")}>C.S</KeywordBtn>
       </KeywordList>
     </Main>
