@@ -47,10 +47,7 @@ function App() {
           <Route path="/board" element={<AllContent />}></Route>
           <Route path="/test" element={<UserList />}></Route>
           <Route path="/friends-list" element={<Friends />}></Route>
-          <Route
-            path="/friends/response-list"
-            element={<FriendsResponse />}
-          ></Route>
+          <Route path="/friends/response-list" element={<FriendsResponse />}></Route>
         </Routes>
       </ContentWrapper>
       <Footer />

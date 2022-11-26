@@ -2,6 +2,7 @@ import S from "./styled";
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
+import { Cookies } from "react-cookie";
 
 const Login = () => {
   const [id, setId] = useState("");
@@ -25,13 +26,17 @@ const Login = () => {
     try {
       const res = await axios({
         method: "post",
-        url: "/apis/auth/login",
+        url: "/api/auth",
         data: {
-          id,
+          id: id,
           pw: password,
         },
       });
       console.log(res);
+
+      const cookie = new Cookies();
+      cookie.set("accessToken", res.data.accessToken);
+      cookie.set("refreshToken", res.data.refreshToken);
     } catch (error) {
       const err = error.response.data;
       console.log(err);
@@ -43,22 +48,14 @@ const Login = () => {
     navigate("/Register");
   };
 
+  console.log(id, password);
+
   return (
     <S.Container>
       <S.Title>Login Page</S.Title>
       <S.Form>
-        <S.Input
-          type="text"
-          value={id}
-          onChange={onIdHandler}
-          placeholder="아이디"
-        />
-        <S.Input
-          type="password"
-          value={password}
-          onChange={onPasswordHandler}
-          placeholder="비밀번호"
-        />
+        <S.Input type="text" value={id} onChange={onIdHandler} placeholder="아이디" />
+        <S.Input type="password" value={password} onChange={onPasswordHandler} placeholder="비밀번호" />
         <div>
           <S.LoginButton type="submit" onClick={login}>
             Login
@@ -69,9 +66,7 @@ const Login = () => {
           <S.snsLogin>KaKao</S.snsLogin>
         </div>
       </S.Form>
-      <S.RegisterButton onClick={navigateToRegister}>
-        "Link for Register"
-      </S.RegisterButton>
+      <S.RegisterButton onClick={navigateToRegister}>"Link for Register"</S.RegisterButton>
     </S.Container>
   );
 };

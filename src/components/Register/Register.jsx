@@ -28,7 +28,7 @@ const Register = () => {
     try {
       const res = await axios({
         method: "post",
-        url: "/apis/auth/join",
+        url: "/api/auth/join",
         data: {
           id,
           pw: password,
@@ -47,20 +47,10 @@ const Register = () => {
   return (
     <S.Container>
       <S.Title>Register Page</S.Title>
-      <S.Input
-        type="text"
-        value={nickname}
-        onChange={onNicknameHandler}
-        placeholder="Nickname"
-      />
+      <S.Input type="text" value={nickname} onChange={onNicknameHandler} placeholder="Nickname" />
 
       <S.Input type="text" placeholder="id" value={id} onChange={onIdHandler} />
-      <S.Input
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={onPasswordHandler}
-      />
+      <S.Input type="password" placeholder="password" value={password} onChange={onPasswordHandler} />
 
       <S.SubmitButton type="submit" onClick={joinUser}>
         "Register!"

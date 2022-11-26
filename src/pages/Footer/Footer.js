@@ -17,7 +17,7 @@ const Content = styled.div`
 const Footer = () => {
   return (
     <FooterDiv>
-      <Content>Copyright ~~~</Content>
+      <Content>Copyright Wap2</Content>
     </FooterDiv>
   );
 };
