@@ -12,18 +12,17 @@ background-color:#2C3333;
 const ContentList = styled.ul`
 `
 const Header = styled.ul`
+    border-radius: 20px 20px 20px 20px;
     color:#E7F6F2;
-    background-color:#2C3333;
+    background-color:#395B64;
     font-size:15px;
-    margin-bottom:1px;
+    margin-bottom:10px;
     padding-top:5px;
     padding-bottom:5px;
     padding-left:10px;
 
-
     display:grid;
-    grid-template-columns: 5% 17% 16% 16.5% 11% 11%;
-
+    grid-template-columns: 8% 17% 16% 16.5% 11% 11%;
 
     flex-direction:row;
     justify-content:space-between;
@@ -34,7 +33,7 @@ const Header = styled.ul`
     border-style: solid;
     border-color:gray;
     border-top-width: 0px;
-    border-bottom-width:2px;
+    border-bottom-width:0px;
     border-left-width:0px;
     border-right-width:0px;
     
@@ -46,8 +45,20 @@ const Keywords = styled.ul`
     list-style:none;
     align-items:space-between;
     align-content:center;
-    margin-right:30px;
+    /*margin-right:30px;*/
     width: 95%;/*vh: view hight - 보이는 부분의 100을*/
+    padding-left:0px;
+    margin-left:5vh;
+
+    /*border*/
+    border-style: solid;
+    border-color:gray;
+    border-top-width: 2px;
+    border-bottom-width:2px;
+    border-left-width:2px;
+    border-right-width:2px;
+
+    border-radius: 20px 20px 20px 20px;
 `
 
 const Content = styled.li`
@@ -55,7 +66,7 @@ const Content = styled.li`
     margin-bottom:1px;
     padding-top:5px;
     padding-bottom:5px;
-    padding-left:10px;
+    padding-left:20px;
 
     display:grid;
     grid-template-columns: 3% 20% 20% 20% 7% 15%;
@@ -68,11 +79,12 @@ const Content = styled.li`
 
     /*border*/
     border-style: solid;
-    border-color:gray;
-    border-top-width: 0px;
-    border-bottom-width:2px;
+    border-color: gray;
+    border-top-width: 2px;
+    border-bottom-width:0px;
     border-left-width:0px;
     border-right-width:0px;
+    border-radius: 20px 20px 20px 20px;
 `
 const Num = styled.b`
 `
@@ -141,7 +153,7 @@ export default function BoardTable(){
                             </Topic>
                             <Category>{Post.category}</Category>
                             <Writer>{Post.id}</Writer>
-                            <Like>{Post.likes}</Like>
+                            <Like>♥{Post.likes}</Like>
                             <Date>{Post.date}</Date>
                     </Content>
                 ))}

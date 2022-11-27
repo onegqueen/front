@@ -10,7 +10,7 @@ import StatsFlower from "../../components/Stats/StatsFlower";
 
 const Main = styled.div`
   display: flex;
-  height: 100vh;
+  height: calc(100% - 30px);
   justify-content: center;
   align-items: center;
 
@@ -20,7 +20,7 @@ const Main = styled.div`
 const Content = styled.div`
   width: 40rem;
   padding: 2rem 0;
-  border: 0.3rem solid #b9e0ff;
+  border: 0.3rem solid #395b64;
   border-radius: 2rem;
 `;
 

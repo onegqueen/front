@@ -1,28 +1,72 @@
-import React from "react";
 import S from "./styled";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import axios from "axios";
+import { Cookies } from "react-cookie";
 
 const Login = () => {
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  //아이디
+  const onIdHandler = (event) => {
+    setId(event.currentTarget.value);
+  };
+
+  //비밀번호
+  const onPasswordHandler = (event) => {
+    setPassword(event.currentTarget.value);
+  };
+
+  // 로그인
+  const login = async () => {
+    navigate("/MyAccount");
+    try {
+      const res = await axios({
+        method: "post",
+        url: "/api/auth",
+        data: {
+          id: id,
+          pw: password,
+        },
+      });
+      console.log(res);
+
+      const cookie = new Cookies();
+      cookie.set("accessToken", res.data.accessToken);
+      cookie.set("refreshToken", res.data.refreshToken);
+    } catch (error) {
+      const err = error.response.data;
+      console.log(err);
+    }
+  };
+
+  // 회원가입 링크
+  const navigateToRegister = () => {
+    navigate("/Register");
+  };
+
+  console.log(id, password);
+
   return (
     <S.Container>
       <S.Title>Login Page</S.Title>
       <S.Form>
-        <S.Input type="text" placeholder="아이디" />
-        <S.Input type="password" placeholder="비밀번호" />
+        <S.Input type="text" value={id} onChange={onIdHandler} placeholder="아이디" />
+        <S.Input type="password" value={password} onChange={onPasswordHandler} placeholder="비밀번호" />
         <div>
-          <S.LoginButton>Login</S.LoginButton>
+          <S.LoginButton type="submit" onClick={login}>
+            Login
+          </S.LoginButton>
         </div>
         <div>
           <S.snsLogin>Google</S.snsLogin>
-          <S.snsLogin>Naver</S.snsLogin>
           <S.snsLogin>KaKao</S.snsLogin>
         </div>
       </S.Form>
-      <S.RegisterButton>
-        <Link to={"/register"}>"Link for Register"</Link>
-      </S.RegisterButton>
+      <S.RegisterButton onClick={navigateToRegister}>"Link for Register"</S.RegisterButton>
     </S.Container>
   );
 };

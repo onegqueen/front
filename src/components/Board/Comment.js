@@ -2,9 +2,10 @@ import styled from 'styled-components'
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import axios from 'axios';
-/*
+import CommentTable from"./CommentTable";
+
 const Write = styled.div`
-    background-color:pink;
+    background-color:#A5C9CA;;
     display:flex;
     flex-direction:row;
     justify-content:space-around;
@@ -14,11 +15,28 @@ const Write = styled.div`
     align-content:center;
     padding-top:5px;
     padding-bottom:5px;
+    padding-left:15px;
+    padding-right:15px;
+    margin-top:5px;
+
+    border-radius: 5px 5px / 5px 5px;
 
 `;
-const RegisterBtn = styled.button``;
+const RegisterBtn = styled.button`
+    color:white;
+    background-color:#395B64;
+    border-radius: 5px 5px / 5px 5px;
+    border-color:#2C3333;
+    width:90px;
+    height:40px;
+    margin:10px;
+    :focus{
+        background-color:#2C3333;
+    }
+`
 
 const Profile = styled.span`
+    color:#2C3333;
     font-size : 30px;
     padding-left:10px;
     padding-right:10px;
@@ -28,6 +46,7 @@ const Username = styled.span`
 `;
 
 const CommentContent = styled.span`
+    
 `;
 
 const Reply = styled.ul`
@@ -39,6 +58,7 @@ const Content = styled.textarea.attrs(() => ({
     width: 90%;
     height: 40px;
     resize: none;
+    color:black;
   `;
 
 
@@ -67,7 +87,7 @@ const CommentContents = ()=>{
     }
     };
 
-    const submitHandler = (e)=>{
+    /*const submitHandler = (e)=>{
         e.preventDefault();
 
         let body = {
@@ -76,12 +96,11 @@ const CommentContents = ()=>{
 
         axios.post(`http://localhost:3001/board/reply/${id}`,body)
         .then((res)=>console.log(res));
-    }
+    }*/
     
     return (
     <>
-        <Write 
-            onSubmit = {submitHandler}>
+        <Write>
             <Profile>
                 나
             </Profile>
@@ -95,8 +114,10 @@ const CommentContents = ()=>{
                 등록하기
             </RegisterBtn>
         </Write>
+        <CommentTable/>
     </>
+    
     )
 }
 
-export default CommentContents;*/
+export default CommentContents;

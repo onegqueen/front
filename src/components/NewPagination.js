@@ -6,20 +6,31 @@ import {Link} from 'react-router-dom';
 const Page = styled.ul`
     text-align:center;
 `
+const Span=styled.br`
+    text-indent:5em;
+`
 const Pagenum = styled.li`
+    color:black;
     display:inline-block;
-    background:#dedede;
     overflow:hidden;
+    text-decoration:none;
 `
 
 const Click = styled.a`
     text-decoration:none;
-    width:10px;
-    height:10px;
-    padding:20px;
+    font-size:15px;
+    border-radius: 50px 50px 50px 50px;
+    background-color:#395B64;
+    color:#395B64;
+    padding-top:50px;
+    padding-bottom:20px;
+    padding-left:15px;
+    padding-right:15px;
 
     &:focus{
-        background-color:yellow;
+        border-radius: 50px 50px 50px 50px;
+        text-decoration:none;
+        color:#395B64;
     }
 `
 const Pagination = ({totalPageCount,onChange})=>{
@@ -38,6 +49,7 @@ const Pagination = ({totalPageCount,onChange})=>{
                         <Click onClick={()=> onChange(num)}>
                             <Link to={`./${num}`}>{num}</Link>
                         </Click>
+                        <Span></Span>
                     </Pagenum>)}
 
             </Page>
