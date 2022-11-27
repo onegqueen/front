@@ -1,41 +1,87 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import S from "./styled";
 
 const Register = () => {
   const [nickname, setNickname] = useState("");
-  const [checknick, setChecknick] = useState("");
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const onNicknameHandler = (event) => {
-    setNickname(event.currentTarget.value);
-  };
+  //오류메시지 상태저장
+  const [nameMessage, setNameMessage] = useState("");
+  const [idMessage, setIdMessage] = useState("");
+  const [passwordMessage, setPasswordMessage] = useState("");
+  const [passwordConfirmMessage, setPasswordConfirmMessage] = useState("");
 
-  const onIdHandler = (event) => {
-    setId(event.currentTarget.value);
-  };
+  // 유효성 검사
+  const [isName, setIsName] = useState(false);
+  const [isId, setIsId] = useState(false);
+  const [isPassword, setIsPassword] = useState(false);
+  const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
 
-  const onPasswordHandler = (event) => {
-    setPassword(event.currentTarget.value);
-  };
-
-  const onPasswordCheckHandler = (event) => {
-    setConfirmPassword(event.currentTarget.value);
-  };
-
-  // password 일치여부 확인
-  const onCheck = (event) => {
-    event.preventDefault();
-    if (password !== confirmPassword) {
-      return alert("비밀번호 확인을 다시 한 번 해주십시오.");
-    } else if (password === confirmPassword) {
-      return alert("비밀번호가 일치합니다. 회원가입을 진행해주세요.");
+  // 이름
+  const onChangeNickName = useCallback((e) => {
+    setNickname(e.target.value);
+    if (e.target.value.length < 3 || e.target.value.length > 15) {
+      setNameMessage("3글자 이상 15글자 미만으로 입력해주세요.");
+      setIsName(false);
+    } else {
+      setNameMessage("올바른 닉네임 형식입니다 :)");
+      setIsName(true);
     }
-  };
+  }, []);
 
+  //아이디
+  const onChangeId = useCallback((e) => {
+    const idCurrent = e.target.value;
+    setId(idCurrent);
+    if (e.target.value.length < 3 || e.target.value.length > 15) {
+      setIdMessage("3글자 이상 15글자 미만으로 입력해주세요.");
+      setIsId(false);
+    } else {
+      setIdMessage("올바른 ID 형식입니다.");
+      setIsId(true);
+    }
+  }, []);
+
+  // 비밀번호
+  const onChangePassword = useCallback((e) => {
+    const passwordRegex =
+      /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+    const passwordCurrent = e.target.value;
+    setPassword(passwordCurrent);
+
+    if (!passwordRegex.test(passwordCurrent)) {
+      setPasswordMessage(
+        "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!"
+      );
+      setIsPassword(false);
+    } else {
+      setPasswordMessage("안전한 비밀번호에요 : )");
+      setIsPassword(true);
+    }
+  }, []);
+
+  // 비밀번호 확인
+  const onChangePasswordConfirm = useCallback(
+    (e) => {
+      const passwordConfirmCurrent = e.target.value;
+      setConfirmPassword(passwordConfirmCurrent);
+
+      if (password === passwordConfirmCurrent) {
+        setPasswordConfirmMessage("비밀번호를 똑같이 입력했어요 : )");
+        setIsPasswordConfirm(true);
+      } else {
+        setPasswordConfirmMessage("비밀번호가 틀려요. 다시 확인해주세요");
+        setIsPasswordConfirm(false);
+      }
+    },
+    [password]
+  );
+
+  //닉네임 사용여부
   const onNickHandler = async () => {
     try {
       const res = await axios({
@@ -76,33 +122,68 @@ const Register = () => {
   return (
     <S.Container>
       <S.Title>Register Page</S.Title>
-      <S.Input
-        type="text"
-        value={nickname}
-        onChange={onNicknameHandler}
-        placeholder="Nickname"
-      />
+      <S.formbox>
+        <S.TextField
+          text="이름"
+          type="text"
+          typeName="nickname"
+          placeholder="Nickname"
+          onChange={onChangeNickName}
+        />
+        {nickname.length > 0 && (
+          <span className={`message ${isName ? "success" : "error"}`}>
+            {nameMessage}
+          </span>
+        )}
+      </S.formbox>
 
-      <S.Input type="text" placeholder="id" value={id} onChange={onIdHandler} />
-      <S.Input
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={onPasswordHandler}
-      />
-      <S.Input
-        type="password"
-        placeholder="check password one more"
-        value={confirmPassword}
-        onChange={onPasswordCheckHandler}
-      />
-      <S.buttonAlign>
-        <S.PasswordCheck onClick={onCheck}>비밀번호 재확인</S.PasswordCheck>
+      <S.formbox>
+        <S.TextField
+          text="아이디"
+          type="id"
+          typeName="id"
+          placeholder="ID"
+          onChange={onChangeId}
+        />
+        {id.length > 0 && (
+          <span className={`message ${isId ? "success" : "error"}`}>
+            {idMessage}
+          </span>
+        )}
+      </S.formbox>
 
-        <S.nickCheck type="button" value={checknick} onClick={onNickHandler}>
-          닉네임 중복 체크
-        </S.nickCheck>
-      </S.buttonAlign>
+      <S.formbox>
+        <S.PasswordField
+          onChange={onChangePassword}
+          passwordText="비밀번호 (숫자+영문자+특수문자 조합으로 8자리 이상)"
+          title="비밀번호"
+          typeTitle="password"
+          placeholder="Password"
+        />
+        {password.length > 0 && (
+          <span className={`message ${isPassword ? "success" : "error"}`}>
+            {passwordMessage}
+          </span>
+        )}
+      </S.formbox>
+
+      <S.formbox>
+        <S.PasswordField
+          onChange={onChangePasswordConfirm}
+          passwordText=" "
+          title="비밀번호 확인"
+          typeTitle="passwordConfirm"
+          placeholder="Check one more Password"
+        />
+        {confirmPassword.length > 0 && (
+          <span
+            className={`message ${isPasswordConfirm ? "success" : "error"}`}
+          >
+            {passwordConfirmMessage}
+          </span>
+        )}
+      </S.formbox>
+
       <S.SubmitButton type="submit" onClick={joinUser}>
         "Register!"
       </S.SubmitButton>
