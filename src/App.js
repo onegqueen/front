@@ -14,6 +14,7 @@ import UserList from "./components/Ranking/UserList";
 import Pagination from "./components/Pagination";
 import Friends from "./pages/Friends/Friends";
 import Footer from "./pages/Footer/Footer";
+import NickChangePage from "./pages/NickChangePage";
 import axios from "axios";
 import FriendsNotYet from "./pages/Friends/FriendsNotYet";
 
@@ -39,6 +40,7 @@ function App() {
           <Route path="/Login" element={<LoginPage />} />
           <Route path="/Register" element={<RegisterPage />} />
           <Route path="/MyAccount" element={<MyAccountPage />} />
+          <Route path="/NickChange" element={<NickChangePage />} />
           <Route path="/stats" element={<Stats />}></Route>
           <Route path="/summary" element={<Summary />}></Route>
           <Route path="/header" element={<Header />}></Route>

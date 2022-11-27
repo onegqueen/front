@@ -60,11 +60,36 @@ const Title = styled.div`
   color: #262626;
 `;
 
+const nickCheck = styled.button`
+  width: 50%;
+  height: 48px;
+  border: none;
+  font-weight: 700;
+  background-color: #395b64;
+  border-radius: 64px;
+  color: white;
+  margin-bottom: 16px;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+`;
+
+const PasswordCheck = styled.button`
+  color: black;
+  display: inline-block;
+`;
+const buttonAlign = styled.div`
+  //display: inline-block;
+  text-align: center;
+`;
 const S = {
   Input,
   Container,
   SubmitButton,
   Title,
+  nickCheck,
+  PasswordCheck,
+  buttonAlign,
 };
 
 export default S;
