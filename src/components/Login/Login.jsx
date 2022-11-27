@@ -22,7 +22,6 @@ const Login = () => {
 
   // 로그인
   const login = async () => {
-    navigate("/MyAccount");
     try {
       const res = await axios({
         method: "post",
@@ -37,6 +36,7 @@ const Login = () => {
       const cookie = new Cookies();
       cookie.set("accessToken", res.data.accessToken);
       cookie.set("refreshToken", res.data.refreshToken);
+      navigate("/MyAccount");
     } catch (error) {
       const err = error.response.data;
       console.log(err);
@@ -54,8 +54,18 @@ const Login = () => {
     <S.Container>
       <S.Title>Login Page</S.Title>
       <S.Form>
-        <S.Input type="text" value={id} onChange={onIdHandler} placeholder="아이디" />
-        <S.Input type="password" value={password} onChange={onPasswordHandler} placeholder="비밀번호" />
+        <S.Input
+          type="text"
+          value={id}
+          onChange={onIdHandler}
+          placeholder="아이디"
+        />
+        <S.Input
+          type="password"
+          value={password}
+          onChange={onPasswordHandler}
+          placeholder="비밀번호"
+        />
         <div>
           <S.LoginButton type="submit" onClick={login}>
             Login
@@ -66,7 +76,9 @@ const Login = () => {
           <S.snsLogin>KaKao</S.snsLogin>
         </div>
       </S.Form>
-      <S.RegisterButton onClick={navigateToRegister}>"Link for Register"</S.RegisterButton>
+      <S.RegisterButton onClick={navigateToRegister}>
+        "Link for Register"
+      </S.RegisterButton>
     </S.Container>
   );
 };

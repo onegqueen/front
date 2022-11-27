@@ -1,6 +1,8 @@
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import settingCookie from "../../utils/settingCookie";
 
 const Main = styled.div`
   height: 100px;
@@ -37,17 +39,28 @@ const FriendsHeader = () => {
 
   // 친구 추가
   const addFriends = async () => {
-    const nickname = window.prompt("친구 추가할 사용자 이름을 입력하세요.");
+    const nickname = await Swal.fire({
+      title: "친구 추가할 사용자의 닉네임을 입력하세요.",
+      input: "text",
+    });
     console.log(nickname);
-    try {
-      const res = await axios({
-        method: "post",
-        url: `/api/user/friends/${nickname}`,
-      });
-      console.log(res);
-    } catch (error) {
-      const err = error.response.data;
-      console.log(err);
+
+    if (nickname.isConfirmed && nickname.value !== "") {
+      const token = settingCookie("get-access");
+
+      try {
+        const res = await axios({
+          method: "post",
+          url: `/api/user/friends/${nickname.value}`,
+          headers: {
+            Authorization: `${token}`,
+          },
+        });
+        console.log(res.data);
+      } catch (error) {
+        const err = error.response.data;
+        console.log(err);
+      }
     }
   };
 
@@ -56,9 +69,7 @@ const FriendsHeader = () => {
       <Header>친구목록</Header>
       <BtnList>
         <Btn onClick={addFriends}>친구 추가하기</Btn>
-        <Btn onClick={() => navigate("/friends/response-list")}>
-          친구 요청목록
-        </Btn>
+        <Btn onClick={() => navigate("/friends/not-yet")}>요청 / 응답</Btn>
       </BtnList>
     </Main>
   );

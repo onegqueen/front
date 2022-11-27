@@ -1,43 +1,53 @@
 import React, { useState, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock } from "@fortawesome/free-regular-svg-icons";
 import "./Timer.css";
 import axios from "axios";
-
-const element = <FontAwesomeIcon icon={faClock} />;
+import { useEffect } from "react";
+import settingCookie from "../../../utils/settingCookie";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 const Timer = () => {
   const [timer, setTimer] = useState(0);
-
-  const [isActive, setIsActive] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+  const [isStudy, setIsStudy] = useState(false);
   const countRef = useRef(null);
 
-  const TimeStart = async () => {
-    setIsActive(true);
-    setIsPaused(true);
+  const startTime = async () => {
+    setIsStudy(true);
     countRef.current = setInterval(() => {
       setTimer((timer) => timer + 1);
     }, 1000);
+
+    try {
+      const token = settingCookie("get-access");
+      const res = await axios({
+        method: "get",
+        url: "/api/timer/start",
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const TimePause = () => {
+  // 멈추면
+  const pauseTime = async () => {
+    setIsStudy(false);
     clearInterval(countRef.current);
-    setIsPaused(false);
-  };
 
-  const TimeResume = () => {
-    setIsPaused(true);
-    countRef.current = setInterval(() => {
-      setTimer((timer) => timer + 1);
-    }, 1000);
-  };
-
-  const TimeReset = () => {
-    clearInterval(countRef.current);
-    setIsActive(false);
-    setIsPaused(false);
-    setTimer(0);
+    try {
+      const token = settingCookie("get-access");
+      const res = await axios({
+        method: "get",
+        url: "/api/timer/stop",
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const formatTime = () => {
@@ -48,6 +58,38 @@ const Timer = () => {
     return `${getHours} : ${getMinutes} : ${getSeconds}`;
   };
 
+  const getStudyTime = async () => {
+    try {
+      const token = settingCookie("get-access");
+      console.log(token);
+      const res = await axios({
+        method: "get",
+        url: "/api/timer",
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+      console.log(res.data);
+      const seconds = res.data.minutes * 60;
+      setTimer(seconds);
+      if (res.data.status === "REST") {
+        setIsStudy(false);
+        clearInterval(countRef.current);
+      } else if (res.data.status === "STUDY") {
+        setIsStudy(true);
+        countRef.current = setInterval(() => {
+          setTimer((timer) => timer + 1);
+        }, 1000);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getStudyTime();
+  }, []);
+
   return (
     <div className="app">
       <h2>Your Coding Timer</h2>
@@ -55,26 +97,15 @@ const Timer = () => {
       <div className="stopwatch-card">
         <p>{formatTime()}</p>
         <div className="buttons">
-          {!isActive && !isPaused ? (
-            <button className="timerButton" onClick={TimeStart}>
-              Start
-            </button>
-          ) : isPaused ? (
-            <button className="timerButton" onClick={TimePause}>
+          {isStudy ? (
+            <button className="timerButton" onClick={pauseTime}>
               Pause
             </button>
           ) : (
-            <button className="timerButton" onClick={TimeResume}>
-              Resume
+            <button className="timerButton" onClick={startTime}>
+              Start
             </button>
           )}
-          <button
-            className="timerButton"
-            onClick={TimeReset}
-            disabled={!isActive}
-          >
-            Reset
-          </button>
         </div>
       </div>
     </div>
