@@ -13,10 +13,10 @@ import MyAccountPage from "./pages/MyAccountPage";
 import UserList from "./components/Ranking/UserList";
 import Pagination from "./components/Pagination";
 import Friends from "./pages/Friends/Friends";
-import FriendsResponse from "./pages/Friends/FriendsResponse";
 import Footer from "./pages/Footer/Footer";
 import NickChangePage from "./pages/NickChangePage";
 import axios from "axios";
+import FriendsNotYet from "./pages/Friends/FriendsNotYet";
 
 const AllWrapper = styled.div`
   display: flex;
@@ -49,10 +49,7 @@ function App() {
           <Route path="/board" element={<AllContent />}></Route>
           <Route path="/test" element={<UserList />}></Route>
           <Route path="/friends-list" element={<Friends />}></Route>
-          <Route
-            path="/friends/response-list"
-            element={<FriendsResponse />}
-          ></Route>
+          <Route path="/friends/not-yet" element={<FriendsNotYet />}></Route>
         </Routes>
       </ContentWrapper>
       <Footer />

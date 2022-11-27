@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import axios from "axios";
 import { useState } from "react";
+import { useEffect } from "react";
+import settingCookie from "../../utils/settingCookie";
 
 const test = [
   {
@@ -84,7 +86,7 @@ const Wrapper = styled.div`
 const FriendHeader = styled.div`
   height: 3rem;
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr 50px;
+  grid-template-columns: 1fr 4fr 2fr 2fr 2fr;
   border-bottom: 1px solid black;
   text-align: center;
   align-items: center;
@@ -92,22 +94,32 @@ const FriendHeader = styled.div`
 const RankTitle = styled.div``;
 const NameTitle = styled.div``;
 const TimeTitle = styled.div``;
+const ConditionTitle = styled.div``;
 const DetailTitle = styled.div`
   text-align: right;
   padding-right: 0.5rem;
+`;
+
+const NoFriend = styled.div`
+  display: flex;
+  height: 22rem;
+  font-size: 2rem;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Friend = styled.div`
   height: 3rem;
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr 2fr 2fr 50px;
+  grid-template-columns: 1fr 4fr 2fr 2fr 2fr;
   border-bottom: 1px solid gray;
   text-align: center;
 `;
 const Rank = styled.div``;
 const Name = styled.div``;
 const Time = styled.div``;
+const Condition = styled.div``;
 const Detail = styled.div`
   text-align: right;
   padding-right: 0.5rem;
@@ -132,20 +144,32 @@ const Page = styled.div`
 `;
 
 const FriendsList = () => {
-  const [friends, setFriends] = useState(test);
+  const [friends, setFriends] = useState([]);
 
+  // 친구 목록 불러오기
   const getFriends = async () => {
+    const token = settingCookie("get-access");
     try {
       const res = await axios({
         method: "get",
-        url: "/api/user/friends",
+        url: "/api/user/friend",
+        headers: {
+          Authorization: `${token}`,
+        },
       });
-      console.log(res);
+      setFriends(res.data);
+      console.log(res.data);
     } catch (error) {
       const err = error.response.data;
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    getFriends();
+  }, []);
+
+  console.log(friends.length);
 
   return (
     <Main>
@@ -154,29 +178,25 @@ const FriendsList = () => {
           <RankTitle>순위</RankTitle>
           <NameTitle>이름</NameTitle>
           <TimeTitle>공부 시간</TimeTitle>
+          <ConditionTitle>상태</ConditionTitle>
           <DetailTitle>자세히</DetailTitle>
         </FriendHeader>
-        {friends.map((data, index) => (
-          <Friend key={index}>
-            <Rank>{index}.</Rank>
-            <Name>{data.name}</Name>
-            <Time>{data.time}</Time>
-            <Detail>
-              <DetailBtn>+</DetailBtn>
-            </Detail>
-          </Friend>
-        ))}
+        {friends.length === 0 ? (
+          <NoFriend>친구가 없어요... 😂 </NoFriend>
+        ) : (
+          friends.map((data) => (
+            <Friend key={data.index}>
+              <Rank>{data.index}.</Rank>
+              <Name>{data.nickname}</Name>
+              <Time>{data.todayStudyingMinutes}</Time>
+              <Condition>{data.status}</Condition>
+              <Detail>
+                <DetailBtn>+</DetailBtn>
+              </Detail>
+            </Friend>
+          ))
+        )}
       </Wrapper>
-      <Page>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <div>7</div>
-        <div>8</div>
-      </Page>
     </Main>
   );
 };
