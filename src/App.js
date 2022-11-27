@@ -15,6 +15,7 @@ import Pagination from "./components/Pagination";
 import Friends from "./pages/Friends/Friends";
 import FriendsResponse from "./pages/Friends/FriendsResponse";
 import Footer from "./pages/Footer/Footer";
+import NickChangePage from "./pages/NickChangePage";
 import axios from "axios";
 
 const AllWrapper = styled.div`
@@ -39,6 +40,7 @@ function App() {
           <Route path="/Login" element={<LoginPage />} />
           <Route path="/Register" element={<RegisterPage />} />
           <Route path="/MyAccount" element={<MyAccountPage />} />
+          <Route path="/NickChange" element={<NickChangePage />} />
           <Route path="/stats" element={<Stats />}></Route>
           <Route path="/summary" element={<Summary />}></Route>
           <Route path="/header" element={<Header />}></Route>
@@ -47,7 +49,10 @@ function App() {
           <Route path="/board" element={<AllContent />}></Route>
           <Route path="/test" element={<UserList />}></Route>
           <Route path="/friends-list" element={<Friends />}></Route>
-          <Route path="/friends/response-list" element={<FriendsResponse />}></Route>
+          <Route
+            path="/friends/response-list"
+            element={<FriendsResponse />}
+          ></Route>
         </Routes>
       </ContentWrapper>
       <Footer />

@@ -1,14 +1,15 @@
 import React, { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
+import "../../../utils/settingCookie";
 import "./Timer.css";
 import axios from "axios";
+import settingCookie from "../../../utils/settingCookie";
 
 const element = <FontAwesomeIcon icon={faClock} />;
 
 const Timer = () => {
   const [timer, setTimer] = useState(0);
-
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const countRef = useRef(null);
@@ -19,11 +20,39 @@ const Timer = () => {
     countRef.current = setInterval(() => {
       setTimer((timer) => timer + 1);
     }, 1000);
+    try {
+      const token = settingCookie("get-access");
+      const res = await axios({
+        method: "get",
+        url: "/timer/start",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(res);
+    } catch (error) {
+      const err = error.response.data;
+      console.log(err);
+    }
   };
 
-  const TimePause = () => {
+  const TimePause = async () => {
     clearInterval(countRef.current);
     setIsPaused(false);
+    try {
+      const token = settingCookie("get-access");
+      const res = await axios({
+        method: "get",
+        url: "/timer/stop",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(res);
+    } catch (error) {
+      const err = error.response.data;
+      console.log(err);
+    }
   };
 
   const TimeResume = () => {

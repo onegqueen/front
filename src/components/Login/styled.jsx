@@ -29,6 +29,16 @@ const Form = styled.form`
   flex-direction: column;
 `;
 
+const Form2 = styled.form`
+  width: 400px;
+  height: 300px;
+  display: flex;
+  //flex: 1;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
 const Title = styled.div`
   margin-top: 67px;
   font-size: 42px;
@@ -87,6 +97,7 @@ const snsLogin = styled.button`
 const S = {
   Container,
   Form,
+  Form2,
   Title,
   Input,
   LoginButton,
