@@ -20,6 +20,38 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const TextField = styled.input`
+  border: 1px solid black;
+  color: black;
+  border-radius: 5px;
+  width: 400px;
+  height: 50px;
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  & + & {
+    margin-top: 1rem;
+  }
+`;
+
+const PasswordField = styled.input`
+  border: 1px solid black;
+  color: black;
+  border-radius: 5px;
+  width: 400px;
+  height: 50px;
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  & + & {
+    margin-top: 1rem;
+  }
+`;
+
 const Input = styled.input`
   border: 1px solid black;
   border-radius: 5px;
@@ -74,22 +106,42 @@ const nickCheck = styled.button`
   cursor: pointer;
 `;
 
-const PasswordCheck = styled.button`
-  color: black;
-  display: inline-block;
-`;
 const buttonAlign = styled.div`
   //display: inline-block;
   text-align: center;
 `;
+
+const formbox = styled.form`
+  position: relative;
+  margin-bottom: 20px;
+  .message {
+    color: black;
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 24px;
+    letter-spacing: -1px;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    👉 &.success {
+      color: #8f8c8b;
+    }
+    👉 &.error {
+      color: #ff2727;
+    }
+  }
+`;
+
 const S = {
   Input,
   Container,
   SubmitButton,
   Title,
   nickCheck,
-  PasswordCheck,
   buttonAlign,
+  formbox,
+  TextField,
+  PasswordField,
 };
 
 export default S;
