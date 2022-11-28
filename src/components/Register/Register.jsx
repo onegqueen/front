@@ -130,6 +130,7 @@ const Register = () => {
           placeholder="Nickname"
           onChange={onChangeNickName}
         />
+        <button onClick={onNickHandler}>닉네임 사용 여부</button>
         {nickname.length > 0 && (
           <span className={`message ${isName ? "success" : "error"}`}>
             {nameMessage}
@@ -144,7 +145,7 @@ const Register = () => {
           typeName="id"
           placeholder="ID"
           onChange={onChangeId}
-        />
+        ></S.TextField>
         {id.length > 0 && (
           <span className={`message ${isId ? "success" : "error"}`}>
             {idMessage}

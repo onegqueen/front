@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 const Container = styled.div`
   position: absolute;
-  top: 0;
+  top: 55px;
   bottom: 0;
   width: 100%;
   max-width: 500px;
@@ -21,7 +21,7 @@ const Container = styled.div`
 `;
 
 const TextField = styled.input`
-  border: 1px solid black;
+  border: 0px solid black;
   color: black;
   border-radius: 5px;
   width: 400px;
@@ -37,7 +37,7 @@ const TextField = styled.input`
 `;
 
 const PasswordField = styled.input`
-  border: 1px solid black;
+  border: 0px solid black;
   color: black;
   border-radius: 5px;
   width: 400px;
@@ -83,9 +83,9 @@ const SubmitButton = styled.button`
 `;
 
 const Title = styled.div`
-  margin-top: 67px;
-  align-items: center;
-  justify-content: center;
+  //margin-top: 0px;
+  //align-items: center;
+  //justify-content: center;
   font-size: 42px;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -106,11 +106,6 @@ const nickCheck = styled.button`
   cursor: pointer;
 `;
 
-const buttonAlign = styled.div`
-  //display: inline-block;
-  text-align: center;
-`;
-
 const formbox = styled.form`
   position: relative;
   margin-bottom: 20px;
@@ -123,12 +118,25 @@ const formbox = styled.form`
     position: absolute;
     bottom: -20px;
     left: 0;
-    👉 &.success {
+    &.success {
       color: #8f8c8b;
     }
-    👉 &.error {
+    &.error {
       color: #ff2727;
     }
+  }
+
+  button {
+    position: absolute;
+    color: white;
+    top: 12px;
+    right: 10px;
+    background-color: #395b64;
+    border: none;
+    font-weight: 500;
+    border-radius: 20px;
+    height: 30px;
+    cursor: pointer;
   }
 `;
 
@@ -138,7 +146,6 @@ const S = {
   SubmitButton,
   Title,
   nickCheck,
-  buttonAlign,
   formbox,
   TextField,
   PasswordField,
