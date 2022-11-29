@@ -17,6 +17,12 @@ import Footer from "./pages/Footer/Footer";
 import NickChangePage from "./pages/NickChangePage";
 import axios from "axios";
 import FriendsNotYet from "./pages/Friends/FriendsNotYet";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import settingCookie from "./utils/settingCookie";
+
+import jwt_decode from "jwt-decode";
+import { GET_NAME } from "./reducer/nameSlice";
 
 const AllWrapper = styled.div`
   display: flex;
@@ -30,17 +36,35 @@ const ContentWrapper = styled.div`
 
 axios.defaults.withCredentials = true;
 function App() {
+  const dispatch = useDispatch();
+  const userName = useSelector((state) => state.name.name);
+
+  const isLogin = () => {
+    const token = settingCookie("get-access");
+    // 로그인이 되어있다면
+    if (token !== undefined) {
+      const decode = jwt_decode(token);
+      dispatch(GET_NAME(decode.nickname));
+    }
+  };
+
+  useEffect(() => {
+    isLogin();
+  }, []);
+
   return (
     <AllWrapper>
       <GlobalStyle />
       <ContentWrapper>
         <Header />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/Login" element={<LoginPage />} />
-          <Route path="/Register" element={<RegisterPage />} />
-          <Route path="/MyAccount" element={<MyAccountPage />} />
-          <Route path="/NickChange" element={<NickChangePage />} />
+          {userName !== "" ? (
+            <Route path="/" element={<MyAccountPage />} />
+          ) : (
+            <Route path="/" element={<LoginPage />} />
+          )}
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/nickChange" element={<NickChangePage />} />
           <Route path="/stats" element={<Stats />}></Route>
           <Route path="/summary" element={<Summary />}></Route>
           <Route path="/header" element={<Header />}></Route>

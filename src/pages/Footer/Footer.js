@@ -4,6 +4,7 @@ const FooterDiv = styled.footer`
   text-align: center;
   background-color: #395b64;
   font-size: 1.6rem;
+  line-height: 3rem;
   height: 3rem;
   color: white;
   display: flex;
