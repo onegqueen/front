@@ -7,7 +7,7 @@ import "./Nickchange";
 
 const MyAccount = () => {
   const navigate = useNavigate();
-  const [nickname, setNickname] = useState("");
+  //const [nickname, setNickname] = useState("");
 
   // 닉네임 변경 페이지
   const navigateTochangeNick = () => {

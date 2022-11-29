@@ -22,7 +22,13 @@ const Navbar = styled.nav`
   justify-content: space-between;
   align-items: center;
   background-color: #395b64;
-  padding: 8px 12px;
+  padding: 1rem;
+  @media only screen and (max-width: 768px) {
+    //width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 24px;
+  }
 `;
 
 const Navbarlogo = styled.div`
@@ -31,6 +37,11 @@ const Navbarlogo = styled.div`
   color: white;
   i {
     color: orange;
+  }
+  @media only screen and (max-width: 768px) {
+    //width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
   }
 `;
 
@@ -45,6 +56,18 @@ const Navbarmenu = styled.ul`
   }
   li:hover {
     background-color: #a5c9ca;
+  }
+
+  @media only screen and (max-width: 768px) {
+    //width: 100%;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    li {
+      width: 100%;
+      text-align: center;
+    }
   }
 `;
 
