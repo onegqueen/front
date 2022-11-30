@@ -13,7 +13,6 @@ const Headerbar = styled.div`
   justify-content: space-around ;
   flex-wrap: wrap;
   align-content: center;
-
   height: 30px;
 `;*/
 
@@ -75,7 +74,7 @@ const Navbarlink = styled.div``;
 
 export default function Header() {
   return (
-<<<<<<< HEAD
+    <>
     <Headerbar className="header">
       <h1>
         <Link to="/board"> 게시판 </Link>
@@ -85,7 +84,6 @@ export default function Header() {
         <Link to="/Login"> 로그인 </Link>
       </h1>
     </Headerbar>
-=======
     <body>
       <Navbar>
         <Navbarlogo>
@@ -126,6 +124,6 @@ export default function Header() {
         </Navbarlink>
       </Navbar>
     </body>
->>>>>>> d304b3e060315dca6d2b36e73b7de94aea891657
+  </>
   );
 }
