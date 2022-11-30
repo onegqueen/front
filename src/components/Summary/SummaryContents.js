@@ -94,8 +94,8 @@ const SummaryContents = (props) => {
 
     try {
       const res = await axios({
-        method: "get",
-        url: `/api/auth/validate/${keyword}`,
+        method: "post",
+        url: `/api/post/${keyword}`,
         data: {
           topic: title,
           content: content,
@@ -116,7 +116,7 @@ const SummaryContents = (props) => {
     <Main>
       <Title value={title} onChange={changeTitle}></Title>
       <Editor
-        initialValue="내용을 입력하세요."
+        initialValue="### asd"
         previewStyle="vertical"
         height="600px"
         initialEditType="markdown"
@@ -124,6 +124,8 @@ const SummaryContents = (props) => {
         ref={editorRef}
         onChange={() => {
           const content = editorRef.current.getInstance().getMarkdown();
+          const htmls = editorRef.current.getInstance().getHTML();
+          // console.log(htmls);
           setContent(content);
         }}
       />
