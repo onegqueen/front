@@ -7,6 +7,7 @@ const Header_bar = styled.div`
     flex-wrap:wrap;
     align-items:center;
     align-content:center;
+    
 `
 
 export default function Keywordbar(){

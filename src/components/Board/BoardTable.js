@@ -3,7 +3,7 @@ import apiClient from "../../libs/api/apiClient";
 import { useState, useEffect } from "react";
 import UserAPI from '../../libs/api/user';
 import Pagination from "../NewPagination";
-import {Link} from 'react-router-dom';
+import {Link,useParams} from 'react-router-dom';
 import axios from 'axios';
 
 const Body = styled.div`
@@ -100,27 +100,29 @@ const Date = styled.b`
 `
 
 export default function BoardTable(){
+  let {pagenum} = useParams();
+
     const [contentList, setContentList] = useState([])
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
    
-    const [page, setPage] = useState(1);
-    const handlePageChange = (page)=>{setPage(page);};
+    const [page, setPage] = useState(pagenum);
+    const handlePageChange = (pagenum)=>{setPage(pagenum);};
 
     const url = `api/post/all/${page}`;
 
     useEffect(() => {
-      const fetchBoard = async (page) => {
+      const fetchBoard = async (pagenum) => {
         try {
           setError(null);
           setContentList(null);
           setLoading(true);
           const response = await axios.get(
-            `/api/post/all/${page}`
+            `/api/post/all/${pagenum}`
           );
-          console.log(response)
-          console.log(response.data.data)
-          setContentList(response.data.data);
+          console.log(response.data);
+          console.log(pagenum);
+          setContentList(response.data);
         } catch (e) {
           setError(e);
         }
@@ -129,15 +131,14 @@ export default function BoardTable(){
 
   
       fetchBoard(page);
-    }, []);
+    }, [pagenum]);
 
     if (loading) return <div>로딩중..</div>;
     if (error) return <div>에러가 발생했습니다</div>;
     if (!contentList) return null;  
 
-
     return(
-        <Body>
+        <>
             <Keywords className = "keylist">
                 <Header>
                     <Num>글 번호</Num>
@@ -156,7 +157,7 @@ export default function BoardTable(){
                             <Category>{Post.category}</Category>
                             <Writer>{Post.member}</Writer>
                             <Like>♥{Post.likes}</Like>
-                            <Date>{Post.dateTime}</Date>
+                            <Date>{Post.dateTime.substr(0,10)}</Date>
                     </Content>
                 ))}
             </Keywords>
@@ -164,7 +165,7 @@ export default function BoardTable(){
                 totalPageCount={10}
                 onChange = {handlePageChange}/>
 
-        </Body>
+        </>
     );
 
 }

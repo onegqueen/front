@@ -108,9 +108,10 @@ const Markdown = styled.div`
 
 const Article=()=>{
     let {id} = useParams();
-    let {reply_page}=useParams();
 
     const [content, setContent] = useState();
+    const [replypage,setReplyPage] = useState(1);
+    const [likes,setLike]=useState(false);
     const [replycontent,setReplyContent] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -122,17 +123,18 @@ const Article=()=>{
     
 
     useEffect(() => {
-      const fetchContent = async (id,reply_page) => {
+      const fetchContent = async (id,replypage) => {
           const response = await axios.get(
-            `api/post/${id}/${reply_page}`
+            `api/post/view/${id}/${replypage}`
           )
   
           console.log(response.data);
-          setContent(response.data[0]);
-          setReplyContent(response.data[1]);
+          setContent(response.data.post);
+          setReplyContent(response.data.comments);
+          setLike(response.data.likePressed);
           
         }
-        fetchContent(id,reply_page);
+        fetchContent(id,replypage);
     },[]);
 
     if (loading) return <div>로딩중..</div>;
@@ -182,10 +184,7 @@ const Article=()=>{
                   dateTime={replycontent.dateTime}
                   />
               </ReplyBox>
-
             </Main>
-            
-            
         </>
     );
 }

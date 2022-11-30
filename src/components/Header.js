@@ -5,7 +5,6 @@ import { faClock } from "@fortawesome/free-solid-svg-icons";
 
 import { Link } from "react-router-dom";
 
-/*
 const Headerbar = styled.div`
   background-color:#2C3333;
   display: flex;
@@ -14,7 +13,7 @@ const Headerbar = styled.div`
   flex-wrap: wrap;
   align-content: center;
   height: 30px;
-`;*/
+`;
 
 const Navbar = styled.nav`
   display: flex;
@@ -75,15 +74,6 @@ const Navbarlink = styled.div``;
 export default function Header() {
   return (
     <>
-    <Headerbar className="header">
-      <h1>
-        <Link to="/board"> 게시판 </Link>
-        <Link to="/rank"> 랭킹 </Link>
-        <Link to="/summary"> summary </Link>
-        <Link to="/stats"> 꽃키우기 </Link>
-        <Link to="/Login"> 로그인 </Link>
-      </h1>
-    </Headerbar>
     <body>
       <Navbar>
         <Navbarlogo>
@@ -99,12 +89,12 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/board" style={{ textDecoration: "none" }}>
+            <Link to="/summary" style={{ textDecoration: "none" }}>
               게시글 등록
             </Link>
           </li>
           <li>
-            <Link to="/board" style={{ textDecoration: "none" }}>
+            <Link to="/board/1" style={{ textDecoration: "none" }}>
               게시글 보기
             </Link>
           </li>

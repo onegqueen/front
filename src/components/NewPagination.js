@@ -28,7 +28,6 @@ const Click = styled.a`
     padding-right:15px;
 
     &:focus{
-        border-radius: 50px 50px 50px 50px;
         text-decoration:none;
         color:#395B64;
     }
@@ -47,7 +46,7 @@ const Pagination = ({totalPageCount,onChange})=>{
                 {pageNumbers.map(num=>
                     <Pagenum key = {num}>
                         <Click onClick={()=> onChange(num)}>
-                            <Link to={`./${num}`}>{num}</Link>
+                            <Link to={`/board/${num}`}>{num}</Link>
                         </Click>
                         <Span></Span>
                     </Pagenum>)}

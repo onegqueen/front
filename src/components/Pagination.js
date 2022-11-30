@@ -4,17 +4,16 @@ import {Link} from 'react-router-dom';
 
 const Page = styled.ul`
     text-align:center;
-    color:black;
-    background:black;
 `
 const Pagenum = styled.li`
     color:#2C3333;
     display:inline-block;
+    background-color:ba;
     overflow:hidden;
 `
 
 const Click = styled.a`
-    background-color:black;
+    text-decoration:none;
     width:10px;
     height:10px;
     padding:20px;
@@ -37,7 +36,7 @@ const Pagination = ({postPerPage,totalPosts,paginate})=>{
                 {pageNumbers.map(num=>
                     <Pagenum key = {num}>
                         <Click onClick={()=> paginate(num)}>
-                            <Link to={`./${num}`}>{num}</Link>
+                            <Link to={`./`}>{num}</Link>
                         </Click>
                     </Pagenum>)}
 
