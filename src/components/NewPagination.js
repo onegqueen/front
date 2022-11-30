@@ -46,7 +46,7 @@ const Pagination = ({totalPageCount,onChange})=>{
                 {pageNumbers.map(num=>
                     <Pagenum key = {num}>
                         <Click onClick={()=> onChange(num)}>
-                            <Link to={`/board/${num}`}>{num}</Link>
+                            <Link to={`./${num}`}>{num}</Link>
                         </Click>
                         <Span></Span>
                     </Pagenum>)}

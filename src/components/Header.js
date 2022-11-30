@@ -94,7 +94,7 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/board/1" style={{ textDecoration: "none" }}>
+            <Link to="/board/all/1" style={{ textDecoration: "none" }}>
               게시글 보기
             </Link>
           </li>

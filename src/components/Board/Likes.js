@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import axios from 'axios';
+import settingCookie from "../../utils/settingCookie";
+
+
 
 const Stat = styled.div`
   display: flex;
@@ -30,23 +34,48 @@ const StatPlusBtn = styled.button`
 `;
 
 
-
-
-/*html을 마크다운*/
 const Likes = (props) => {
     const navigate = useNavigate();
-    const { remainPoints, setRemainPoints } = props;
+    const [likepoint, setlikePoint] = useState(props.count);
+    const [liked, setLiked] = useState(props.likepressed);
 
-    const [likes, setLikes] = useState(0);
+    const sendliked = async () => {
+      const token = settingCookie("get-access");
+
+        try {
+          const res = await axios({
+            method: "post",
+            url: `/api/post/likes/${props.id}`,
+            data: {
+              id : props.id,
+            },
+            headers: {
+                Authorization:`${token}`,
+            },
+          });
+          console.log(res);
+        } catch (error) {
+          const err = error.response.data;
+          console.log(err);
+        }
+      };
 
     const addPoints = () => {
-          setLikes(likes+1);
+        if (liked) {
+          setlikePoint(likepoint-1);
+          setLiked(false);
+          alert("좋아요가 취소되었습니다.:>");
+        } else {
+          setlikePoint(likepoint + 1);
+          setLiked(true);
+        }
+        sendliked()
       };
 
     return(
         <Stat>
         <StatName>좋아요</StatName>
-        <StatPoints>{likes}</StatPoints>
+        <StatPoints>{likepoint}</StatPoints>
         <StatPlusBtn name="like" onClick={addPoints}>
             ♥
         </StatPlusBtn>

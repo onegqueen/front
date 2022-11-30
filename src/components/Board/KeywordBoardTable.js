@@ -3,9 +3,8 @@ import apiClient from "../../libs/api/apiClient";
 import { useState, useEffect } from "react";
 import UserAPI from '../../libs/api/user';
 import Pagination from "../NewPagination";
-import {Link,useParams} from 'react-router-dom';
+import {Link,useParams,useLocation} from 'react-router-dom';
 import axios from 'axios';
-import Keywordbar from "./Keywordbar";
 
 
 const Body = styled.div`
@@ -107,17 +106,21 @@ const Date = styled.b`
 `
 
 export default function BoardTable(){
+  let {keyword} = useParams();
   let {pagenum} = useParams();
+
+  
+  console.log(pagenum);
+
 
     const [contentList, setContentList] = useState([])
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [category,setKeyWord]=useState(keyword);
    
     const [page, setPage] = useState(pagenum);
     const handlePageChange = (pagenum)=>{setPage(pagenum);};
-
-    const url = `api/post/all/${page}`;
-
+    
     useEffect(() => {
       const fetchBoard = async (pagenum) => {
         try {
@@ -125,11 +128,11 @@ export default function BoardTable(){
           setContentList(null);
           setLoading(true);
           const response = await axios.get(
-            `/api/post/all/${pagenum-1}`
+            `/api/post/${category}/${pagenum-1}`
           );
           console.log(response);
-          console.log(pagenum);
           setContentList(response.data);
+        
         } catch (e) {
           setError(e);
         }
@@ -138,7 +141,8 @@ export default function BoardTable(){
 
   
       fetchBoard(page);
-    }, [pagenum]);
+
+    }, []);
 
     if (loading) return <div>로딩중..</div>;
     if (error) return <div>에러가 발생했습니다</div>;

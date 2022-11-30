@@ -102,15 +102,18 @@ const Date = styled.b`
 
 export default function CommentTable(props){
     let{reply_page}=useParams();
-    
+
     const [contentList, setContentList] = useState([])
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
    
     const [page, setPage] = useState(1);
     const handlePageChange = (page)=>{setPage(page);};
+
+    useEffect(()=>{
+        setContentList(props.commentcontents);
+    },[]);
     
-    setContentList(props);
 
     if (loading) return <div>로딩중..</div>;
     if (error) return <div>에러가 발생했습니다</div>;

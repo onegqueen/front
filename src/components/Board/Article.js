@@ -6,11 +6,9 @@ import CommentContents from './Comment';
 import Likes from'./Likes';
 import Modify from './Modify';
 import View from './View';
-import ReactMarkdown from "react-markdown";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import TurndownService from 'turndown';
-import { Editor,Viewer } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
+import settingCookie from "../../utils/settingCookie";
 
 
 const Main = styled.div`
@@ -111,7 +109,7 @@ const Article=()=>{
 
     const [content, setContent] = useState();
     const [replypage,setReplyPage] = useState(1);
-    const [likes,setLike]=useState(false);
+    const [liked,setLiked]=useState(false);
     const [replycontent,setReplyContent] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -123,15 +121,21 @@ const Article=()=>{
     
 
     useEffect(() => {
+      const token = settingCookie("get-access");
       const fetchContent = async (id,replypage) => {
-          const response = await axios.get(
-            `api/post/view/${id}/${replypage}`
-          )
+          const response = await axios({
+            method:"get",
+            url:`/api/post/view/${id}/${replypage-1}`,
+            headers: {
+                Authorization:`${token}`,
+            },
+      });
   
           console.log(response.data);
           setContent(response.data.post);
           setReplyContent(response.data.comments);
-          setLike(response.data.likePressed);
+          setLiked(response.data.likePressed);
+
           
         }
         fetchContent(id,replypage);
@@ -172,18 +176,17 @@ const Article=()=>{
               </Routes>
                 
               </Content>
-              <Likes/>
+              <Likes
+                count={content.likes}
+                likepressed={liked}
+                id = {content.id}/>
               <ReplyBox>
                 <div>댓글작성</div>
                 <CommentContents
-                  id={replycontent.id}
-                  member={replycontent.member}
-                  topic={replycontent.topic}
-                  category={replycontent.category}
-                  likes={replycontent.likes}
-                  dateTime={replycontent.dateTime}
+                  commentcontents={replycontent}
                   />
               </ReplyBox>
+
             </Main>
         </>
     );
