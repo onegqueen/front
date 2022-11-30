@@ -130,7 +130,7 @@ export default function CommentTable(props){
                             <Topic>
                                 {Post.content}
                             </Topic>
-                            <Date>{Post.dateTime}</Date>
+                            <Date>{Post.dateTime.substr(0,10)}</Date>
                     </Content>
                 ))}
             </Keywords>

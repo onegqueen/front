@@ -3,6 +3,8 @@ import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import axios from 'axios';
 import CommentTable from"./CommentTable";
+import { id } from 'visdom/lib/dom/props';
+import settingCookie from "../../utils/settingCookie";
 
 const Write = styled.div`
     background-color:#A5C9CA;;
@@ -86,7 +88,28 @@ const CommentContents = (props)=>{
         return false;
     }
     };
-    
+    // 요약 등록
+  const registercomment= async () => {
+    const token = settingCookie("get-access");
+    try {
+      const res = await axios({
+        method: "post",
+        url: `/api/post/reply/${props.pageid}`,
+        data: {
+          id:props.pageid,
+          content:comment.content,
+        },
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+
+      console.log(res);
+    } catch (error) {
+      const err = error.response.data;
+      console.log(err);
+    }
+  };
 
     /*const submitHandler = (e)=>{
         e.preventDefault();
@@ -107,11 +130,11 @@ const CommentContents = (props)=>{
             </Profile>
             <Content
             name="content"
-            value={comment.content}
             onChange={changeComment}
+            value={comment.content}
             onKeyDown={clickTab}>
             </Content>
-            <RegisterBtn type ="submit ">
+            <RegisterBtn onClick={registercomment} type ="submit ">
                 등록하기
             </RegisterBtn>
         </Write>

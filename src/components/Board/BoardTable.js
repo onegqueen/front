@@ -159,7 +159,7 @@ export default function BoardTable(){
                     <Content key={Post.id}>
                             <Num>{contentList.indexOf(Post)+1}</Num>
                             <Topic>
-                                <Link to = {`./${Post.id}`}>{Post.topic}</Link>
+                                <Link to = {`/board/${pagenum}/${Post.category}/${Post.id}`}>{Post.topic}</Link>
                             </Topic>
                             <Category>{Post.category}</Category>
                             <Writer>{Post.member}</Writer>

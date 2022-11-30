@@ -184,6 +184,7 @@ const Article=()=>{
                 <div>댓글작성</div>
                 <CommentContents
                   commentcontents={replycontent}
+                  pageid={content.id}
                   />
               </ReplyBox>
 
