@@ -3,7 +3,7 @@ import apiClient from "../../libs/api/apiClient";
 import { useState, useEffect } from "react";
 import UserAPI from '../../libs/api/user';
 import Pagination from "../NewPagination";
-import {Link} from 'react-router-dom';
+import {Link,useParams} from 'react-router-dom';
 import axios from 'axios';
 
 const Body = styled.body`
@@ -100,7 +100,9 @@ const Date = styled.b`
 `
 
 
-export default function CommentTable(){
+export default function CommentTable(props){
+    let{reply_page}=useParams();
+    
     const [contentList, setContentList] = useState([])
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -108,27 +110,7 @@ export default function CommentTable(){
     const [page, setPage] = useState(1);
     const handlePageChange = (page)=>{setPage(page);};
     
-    useEffect(() => {
-      const fetchBoard = async (page) => {
-        try {
-          setError(null);
-          setContentList(null);
-          setLoading(true);
-          const response = await axios.get(
-            `http://localhost:3001/contents/3`
-          );
-          console.log(response.data)
-          console.log(response.data.data)
-          setContentList(response.data.data);
-        } catch (e) {
-          setError(e);
-        }
-        setLoading(false);
-      };
-
-  
-      fetchBoard(page);
-    }, []);
+    setContentList(props);
 
     if (loading) return <div>로딩중..</div>;
     if (error) return <div>에러가 발생했습니다</div>;
@@ -141,11 +123,11 @@ export default function CommentTable(){
             <Keywords className = "keylist">
                 {contentList.map((Post)=>(
                     <Content key={Post.id}>
-                            <Num>작성자</Num>
+                            <Num>{Post.member}</Num>
                             <Topic>
-                                내용 어쩌구 저쩌구 댓글다는중 악플은 안대용
+                                {Post.content}
                             </Topic>
-                            <Date>{Post.date}</Date>
+                            <Date>{Post.dateTime}</Date>
                     </Content>
                 ))}
             </Keywords>

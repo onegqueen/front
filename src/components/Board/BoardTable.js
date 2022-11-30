@@ -6,7 +6,7 @@ import Pagination from "../NewPagination";
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
-const Body = styled.body`
+const Body = styled.div`
 background-color:#2C3333;
 `
 const ContentList = styled.ul`
@@ -106,7 +106,9 @@ export default function BoardTable(){
    
     const [page, setPage] = useState(1);
     const handlePageChange = (page)=>{setPage(page);};
-    
+
+    const url = `api/post/all/${page}`;
+
     useEffect(() => {
       const fetchBoard = async (page) => {
         try {
@@ -114,9 +116,9 @@ export default function BoardTable(){
           setContentList(null);
           setLoading(true);
           const response = await axios.get(
-            `http://localhost:3001/contents/3`
+            `/api/post/all/${page}`
           );
-          console.log(response.data)
+          console.log(response)
           console.log(response.data.data)
           setContentList(response.data.data);
         } catch (e) {
@@ -152,15 +154,16 @@ export default function BoardTable(){
                                 <Link to = {`./${Post.id}`}>{Post.topic}</Link>
                             </Topic>
                             <Category>{Post.category}</Category>
-                            <Writer>{Post.id}</Writer>
+                            <Writer>{Post.member}</Writer>
                             <Like>♥{Post.likes}</Like>
-                            <Date>{Post.date}</Date>
+                            <Date>{Post.dateTime}</Date>
                     </Content>
                 ))}
             </Keywords>
             <Pagination 
                 totalPageCount={10}
                 onChange = {handlePageChange}/>
+
         </Body>
     );
 

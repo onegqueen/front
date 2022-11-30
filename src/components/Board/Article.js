@@ -1,13 +1,16 @@
 import styled from 'styled-components';
-import { useState, useEffect,useCallback } from "react";
+import { useState, useEffect,useRef} from "react";
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link,useParams} from 'react-router-dom';
 import CommentContents from './Comment';
 import Likes from'./Likes';
+import Modify from './Modify';
+import View from './View';
 import ReactMarkdown from "react-markdown";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import TurndownService from 'turndown';
-
+import { Editor,Viewer } from '@toast-ui/react-editor';
+import '@toast-ui/editor/dist/toastui-editor.css';
 
 
 const Main = styled.div`
@@ -75,9 +78,9 @@ const ReplyBox = styled.div`
 
 
 const Markdown = styled.div`
-  
   // 엔터누르면 \n 적용
   * {
+    color:white;
     white-space: pre-wrap;
     word-break: break-all;
   }
@@ -90,49 +93,58 @@ const Markdown = styled.div`
     word-break: break-all;
   }
   ul {
+    color:white;
     font-size: 1.4rem;
     padding-left: 2rem;
     margin: 0.5rem 0;
     white-space: pre-wrap;
     word-break: break-all;
-    
+  }
+  h2{
+    color:white;
   }
 `;
 
 
-export default function Article(){
+const Article=()=>{
+    let {id} = useParams();
+    let {reply_page}=useParams();
+
     const [content, setContent] = useState();
     const [replycontent,setReplyContent] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const TurndownService =require('turndown').default
-
     const turndownService = new TurndownService();
+
+    const editorRef = useRef();
     
-  
+
     useEffect(() => {
-      const fetchContent = async () => {
+      const fetchContent = async (id,reply_page) => {
           const response = await axios.get(
-            `http://localhost:3001/article`
-          );
+            `api/post/${id}/${reply_page}`
+          )
+  
           console.log(response.data);
-          setContent(response.data);
+          setContent(response.data[0]);
+          setReplyContent(response.data[1]);
+          
         }
-        fetchContent();
+        fetchContent(id,reply_page);
     },[]);
 
     if (loading) return <div>로딩중..</div>;
     if (error) return <div>에러가 발생했습니다</div>;
     if (!content) return null;
 
-    const markdown = turndownService.turndown(`
-      <div>안녕하세요 어쩌구 저쩌구 이렁쿵저러쿵</div>
-    `);
-    console.log(markdown);
-
+    const htmlString = `${content.content}`
+    editorRef.current?.getInstance().setHTML(htmlString);
     
-
+    const htmlStringtest='## 제목'
+    const htmlStringtest2='## 제목 <p>내용</p>'
+    editorRef.current?.getInstance().setHTML(htmlStringtest);
 
     return(
         <>
@@ -145,23 +157,30 @@ export default function Article(){
                   {content.topic}
                 </Title>
                 <UserName>
-                  {content.nickname}
+                  작성자 : {content.member}
                 </UserName>
                 <Date>
                   {content.date}
                 </Date>
               </ArticleHeader>
               <Content>
-                <Markdown>
-                  {markdown}
-                </Markdown>
+              <Routes>
+                <Route path=":modify" element={<Modify content={htmlStringtest}/>}/>
+                <Route path="" element={<View content={htmlStringtest2}/>}/>
+              </Routes>
+                
               </Content>
-
               <Likes/>
-
               <ReplyBox>
                 <div>댓글작성</div>
-                <CommentContents/>
+                <CommentContents
+                  id={replycontent.id}
+                  member={replycontent.member}
+                  topic={replycontent.topic}
+                  category={replycontent.category}
+                  likes={replycontent.likes}
+                  dateTime={replycontent.dateTime}
+                  />
               </ReplyBox>
 
             </Main>
@@ -170,3 +189,5 @@ export default function Article(){
         </>
     );
 }
+export default Article;
+/**/

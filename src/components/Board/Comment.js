@@ -62,7 +62,7 @@ const Content = styled.textarea.attrs(() => ({
   `;
 
 
-const CommentContents = ()=>{
+const CommentContents = (props)=>{
 
     const [comment,setComment]=useState({
         content:""
@@ -114,7 +114,13 @@ const CommentContents = ()=>{
                 등록하기
             </RegisterBtn>
         </Write>
-        <CommentTable/>
+        <CommentTable
+            id={props.id}
+            member={props.member}
+            topic={props.topic}
+            category={props.category}
+            likes={props.likes}
+            dateTime={props.dateTime}/>
     </>
     
     )

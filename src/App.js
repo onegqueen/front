@@ -46,7 +46,7 @@ function App() {
           <Route path="/userlist" element={<UserList />}></Route>
           <Route path="/rank" element={<TodayRank />}></Route>
           <Route path="/board" element={<AllContent />}></Route>
-          <Route path="/board/qefd" element={<CorsArticle />}></Route>
+          <Route path="/board/:id/:reply_page" element={<CorsArticle/>}></Route>
           <Route path="/test" element={<UserList />}></Route>
           <Route path="/friends-list" element={<Friends />}></Route>
           <Route path="/friends/response-list" element={<FriendsResponse />}></Route>
