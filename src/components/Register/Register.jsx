@@ -28,7 +28,9 @@ const Register = () => {
       setNameMessage("3글자 이상 15글자 미만으로 입력해주세요.");
       setIsName(false);
     } else {
-      setNameMessage("올바른 닉네임 형식입니다 :)");
+      setNameMessage(
+        "올바른 닉네임 형식입니다 :) 닉네임 사용 여부 확인해주세요."
+      );
       setIsName(true);
     }
   }, []);
@@ -121,73 +123,77 @@ const Register = () => {
 
   return (
     <S.Container>
-      <S.Title>Register Page</S.Title>
-      <S.formbox>
-        <S.TextField
-          text="이름"
-          type="text"
-          typeName="nickname"
-          placeholder="Nickname"
-          onChange={onChangeNickName}
-        />
-        <button onClick={onNickHandler}>닉네임 사용 여부</button>
-        {nickname.length > 0 && (
-          <span className={`message ${isName ? "success" : "error"}`}>
-            {nameMessage}
-          </span>
-        )}
-      </S.formbox>
+      <S.Wrapper>
+        <S.Title>Register Page</S.Title>
+        <S.Form onSubmit={joinUser}>
+          <S.formbox>
+            <S.TextField
+              text="이름"
+              type="text"
+              typeName="nickname"
+              placeholder="Nickname"
+              onChange={onChangeNickName}
+            />
+            <button onClick={onNickHandler}>닉네임 사용 여부</button>
+            {nickname.length > 0 && (
+              <span className={`message ${isName ? "success" : "error"}`}>
+                {nameMessage}
+              </span>
+            )}
+          </S.formbox>
 
-      <S.formbox>
-        <S.TextField
-          text="아이디"
-          type="id"
-          typeName="id"
-          placeholder="ID"
-          onChange={onChangeId}
-        ></S.TextField>
-        {id.length > 0 && (
-          <span className={`message ${isId ? "success" : "error"}`}>
-            {idMessage}
-          </span>
-        )}
-      </S.formbox>
+          <S.formbox>
+            <S.TextField
+              text="아이디"
+              type="id"
+              typeName="id"
+              placeholder="ID"
+              onChange={onChangeId}
+            ></S.TextField>
+            {id.length > 0 && (
+              <span className={`message ${isId ? "success" : "error"}`}>
+                {idMessage}
+              </span>
+            )}
+          </S.formbox>
 
-      <S.formbox>
-        <S.PasswordField
-          onChange={onChangePassword}
-          passwordText="비밀번호 (숫자+영문자+특수문자 조합으로 8자리 이상)"
-          title="비밀번호"
-          typeTitle="password"
-          placeholder="Password"
-        />
-        {password.length > 0 && (
-          <span className={`message ${isPassword ? "success" : "error"}`}>
-            {passwordMessage}
-          </span>
-        )}
-      </S.formbox>
+          <S.formbox>
+            <S.PasswordField
+              onChange={onChangePassword}
+              passwordText="비밀번호 (숫자+영문자+특수문자 조합으로 8자리 이상)"
+              title="비밀번호"
+              type="password"
+              placeholder="Password"
+            />
+            {password.length > 0 && (
+              <span className={`message ${isPassword ? "success" : "error"}`}>
+                {passwordMessage}
+              </span>
+            )}
+          </S.formbox>
 
-      <S.formbox>
-        <S.PasswordField
-          onChange={onChangePasswordConfirm}
-          passwordText=" "
-          title="비밀번호 확인"
-          typeTitle="passwordConfirm"
-          placeholder="Check one more Password"
-        />
-        {confirmPassword.length > 0 && (
-          <span
-            className={`message ${isPasswordConfirm ? "success" : "error"}`}
-          >
-            {passwordConfirmMessage}
-          </span>
-        )}
-      </S.formbox>
+          <S.formbox>
+            <S.PasswordField
+              onChange={onChangePasswordConfirm}
+              passwordText=" "
+              title="비밀번호 확인"
+              type="password"
+              placeholder="Check one more Password"
+            />
+            {confirmPassword.length > 0 && (
+              <span
+                className={`message ${isPasswordConfirm ? "success" : "error"}`}
+              >
+                {passwordConfirmMessage}
+              </span>
+            )}
+          </S.formbox>
 
-      <S.SubmitButton type="submit" onClick={joinUser}>
-        "Register!"
-      </S.SubmitButton>
+          <S.SubmitButton type="button" onClick={() => navigate("/")}>
+            "Register!"
+          </S.SubmitButton>
+        </S.Form>
+      </S.Wrapper>
     </S.Container>
   );
 };
